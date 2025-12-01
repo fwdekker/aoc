@@ -7,6 +7,17 @@ import java.math.BigInteger
 
 
 /**
+ * Converts [this] to an [Int].
+ */
+fun Boolean.toInt(): Int = if (this) 1 else 0
+
+/**
+ * Converts [this] to a [Long].
+ */
+fun Boolean.toLong(): Long = if (this) 1L else 0L
+
+
+/**
  * Converts [this] to an [Int], or throws an exception if over- or underflow would occur.
  *
  * Use the regular [toInt] when you know that no over- or underflow can realistically occur.
