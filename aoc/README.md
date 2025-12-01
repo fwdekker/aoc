@@ -1,9 +1,9 @@
 # AoC: Advent of Code
 My solutions to the [Advent of Code](https://adventofcode.com/).
 
-Uses utility and helper functions from the [`std` subproject](https://github.com/FWDekker/aoc/tree/main/std).
+Uses utility and helper functions from the [`std` subproject](https://github.com/fwdekker/aoc/tree/main/std).
 
-[Click here if you just want to read my solutions.](https://github.com/FWDekker/aoc/tree/main/aoc/src/main/kotlin/com/fwdekker/aoc)
+[Click here if you just want to read my solutions.](https://github.com/fwdekker/aoc/tree/main/aoc/src/main/kotlin/com/fwdekker/aoc)
 
 ## Usage instructions
 If you want to run my solutions, you will have to provide your own puzzle inputs, since those may not be shared according to the terms of Advent of Code.

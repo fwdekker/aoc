@@ -1,7 +1,7 @@
 [submodule "euler"]
 	path = euler
-	url = git@github.com:FWDekker/project-euler.git
+	url = git@github.com:fwdekker/project-euler.git
 	branch = main
 [submodule "aoc/src/main/resources"]
 	path = aoc/src/main/resources
-	url = git@github.com:FWDekker/aoc-inputs.git
+	url = git@github.com:fwdekker/aoc-inputs.git
