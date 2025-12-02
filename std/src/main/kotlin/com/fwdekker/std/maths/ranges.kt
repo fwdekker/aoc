@@ -29,6 +29,25 @@ fun BigInteger.rangeUntil(endExclusive: BigInteger): BigIntegerRange = BigIntege
 
 
 /**
+ * Creates a range from [Pair.first] up to and including [Pair.second].
+ */
+fun Pair<Int, Int>.asRangeTo(): IntRange = first..second
+
+fun Pair<Long, Long>.asRangeTo(): LongRange = first..second
+
+fun Pair<BigInteger, BigInteger>.asRangeTo(): BigIntegerRange = first.rangeTo(second)
+
+/**
+ * Creates a range from [Pair.first] up to and excluding [Pair.second].
+ */
+fun Pair<Int, Int>.asRangeUntil(): IntRange = first..<second
+
+fun Pair<Long, Long>.asRangeUntil(): LongRange = first..<second
+
+fun Pair<BigInteger, BigInteger>.asRangeUntil(): BigIntegerRange = first.rangeUntil(second)
+
+
+/**
  * Splits this range into two parts signifying which elements are less than or equal to [value].
  *
  * The first part contains all elements less than or equal to [value], and the second part contains all elements

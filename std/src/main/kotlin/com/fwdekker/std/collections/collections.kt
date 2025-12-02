@@ -202,7 +202,8 @@ fun <T> Sequence<T>.cyclic(): Sequence<T> = sequence { while (true) yieldAll(thi
 fun <T> Iterable<T>.cyclic(): Sequence<T> = asSequence().cyclic()
 
 /**
- * Returns `false` if an element occurs more than once, or `true` if all elements are unique.
+ * Returns `false` if an element occurs more than once, or `true` if all elements are unique. Assumes transitive
+ * equality.
  *
  * This method does not terminate if the sequence is infinitely long.
  */
@@ -213,8 +214,12 @@ fun <T> Sequence<T>.allDistinct(): Boolean {
 
 fun <T> Iterable<T>.allDistinct(): Boolean = asSequence().allDistinct()
 
+fun <A, B> Pair<A, B>.allDistinct(): Boolean = first != second
+
+fun <A, B, C> Triple<A, B, C>.allDistinct(): Boolean = first != second && first != third && second != third
+
 /**
- * Returns `true` if all elements are equal, or `false` if not all elements are equal.
+ * Returns `true` if all elements are equal, or `false` if not all elements are equal. Assumes transitive equality.
  *
  * This method does not terminate if the sequence is infinitely long.
  */
@@ -224,6 +229,10 @@ fun <T> Sequence<T>.noneDistinct(): Boolean {
 }
 
 fun <T> Iterable<T>.noneDistinct(): Boolean = asSequence().noneDistinct()
+
+fun <A, B> Pair<A, B>.noneDistinct(): Boolean = first == second
+
+fun <A, B, C> Triple<A, B, C>.noneDistinct(): Boolean = first == second && first == third
 
 
 /**
