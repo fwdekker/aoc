@@ -1,69 +1,42 @@
 package com.fwdekker.aoc.y2024
 
+import com.fwdekker.aoc.AreaChartGraph
 import com.fwdekker.aoc.Day
 import com.fwdekker.std.grid.Cardinal
-import com.fwdekker.std.grid.Coords
 import com.fwdekker.std.grid.allCoords
-import com.fwdekker.std.grid.cardinals
-import com.fwdekker.std.grid.contains
-import com.fwdekker.std.grid.get
 import com.fwdekker.std.grid.move
-import com.fwdekker.std.grid.rows
 import com.fwdekker.std.grid.toChart
+import com.fwdekker.std.grid.trail
 
 
 // See https://adventofcode.com/2024/day/12
-// TODO: Clean up code
 class Day12(sample: Int? = null) : Day(year = 2024, day = 12, sample = sample) {
     private val garden = input.toChart()
+    private val graph = AreaChartGraph(garden)
 
 
     override fun part1() =
         garden.allCoords
-            .map { spot ->
-                val seen = mutableSetOf<Coords>()
-                val queue = ArrayDeque(listOf(spot))
-                while (queue.isNotEmpty()) {
-                    val next = queue.removeFirst()
-                    if (next in seen) continue
-
-                    seen += next
-                    queue += next.cardinals.filter { it in garden && garden[it] == garden[next] }
-                }
-                seen
-            }
+            .map { graph.depthFirst(it).toSet() }
             .distinct()
-            .sumOf { region ->
-                region.size * region.sumOf { spot ->
-                    spot.cardinals.count { it !in garden || garden[it] != garden[spot] }
-                }
-            }
+            .sumOf { region -> region.size * region.sumOf { 4 - graph.getNeighbours(it).size } }
 
     override fun part2() =
         garden.allCoords
-            .map { spot ->
-                val seen = mutableSetOf<Coords>()
-                val queue = ArrayDeque(listOf(spot))
-                while (queue.isNotEmpty()) {
-                    val next = queue.removeFirst()
-                    if (next in seen) continue
-
-                    seen += next
-                    queue += next.cardinals.filter { it in garden && garden[it] == garden[next] }
-                }
-                seen
-            }
+            .map { graph.depthFirst(it).toSet() }
             .distinct()
             .sumOf { region ->
                 region.size * region.flatMap { spot ->
-                    Cardinal.entries.filter { spot.move(it) !in region }.map { direction ->
-                        val outside = spot.move(direction);
-                        setOf(outside) +
-                            garden.rows.asSequence().map { outside.move(direction.left, it) }
-                                .takeWhile { it !in region && it.move(direction.behind) in region } +
-                            garden.rows.asSequence().map { outside.move(direction.right, it) }
-                                .takeWhile { it !in region && it.move(direction.behind) in region } to direction
-                    }
+                    Cardinal.entries
+                        .filter { spot.move(it) !in region }
+                        .map { direction ->
+                            val outside = spot.move(direction)
+                            val edge = setOf(outside) +
+                                outside.trail(direction.left) { it !in region && it.move(direction.behind) in region } +
+                                outside.trail(direction.right) { it !in region && it.move(direction.behind) in region }
+
+                            edge to direction
+                        }
                 }.distinct().size
             }
 }

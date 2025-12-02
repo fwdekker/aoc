@@ -1,6 +1,6 @@
 package com.fwdekker.aoc.y2024
 
-import com.fwdekker.aoc.ChartGraph
+import com.fwdekker.aoc.WalledChartGraph
 import com.fwdekker.aoc.Day
 import com.fwdekker.std.collections.associateWithIndex
 import com.fwdekker.std.collections.neverNull
@@ -22,7 +22,7 @@ class Day20(sample: Int? = null, private val minSavings: Int = 100) : Day(year =
 
 
     private fun race(cheats: Int): Int {
-        val path = ChartGraph(chart).shortestPath(chart.coordsOf('E'), chart.coordsOf('S'))!!
+        val path = WalledChartGraph(chart).shortestPath(chart.coordsOf('E'), chart.coordsOf('S'))!!
         val pathLength = path.size - 1
         val distanceLeft = path.associateWithIndex().neverNull()
 

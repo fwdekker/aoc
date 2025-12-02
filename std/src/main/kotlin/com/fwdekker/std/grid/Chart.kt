@@ -14,9 +14,9 @@ typealias Chart = Grid<Char>
 /**
  * Converts this (multi-line) string into a [Chart].
  */
-fun String.toChart() = linesNotBlank().map { it.toList() }
+fun String.toChart(): Chart = linesNotBlank().map { it.toList() }
 
 /**
  * Converts each of the [sections] of this multi-line string into a [Chart].
  */
-fun String.toCharts() = sections().map { section -> section.map { it.toList() } }
+fun String.toCharts(): List<Chart> = sections().map { section -> section.map { it.toList() } }

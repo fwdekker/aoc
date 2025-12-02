@@ -1,4 +1,5 @@
 @file:Suppress("unused")
+
 package com.fwdekker.std.grid
 
 
@@ -81,6 +82,20 @@ fun Coords.move(direction: Direction, distance: Int = 1): Coords =
         SouthEast -> southEast(distance)
         NorthWest -> northWest(distance)
     }
+
+/**
+ * Keeps making a [move] in [direction] until [condition] no longer holds. The starting point is included, and the
+ * [condition] is checked on the starting point.
+ */
+fun Coords.trail(direction: Direction, condition: (Coords) -> Boolean): Sequence<Coords> {
+    var current = this
+    return sequence {
+        while (condition(current)) {
+            yield(current)
+            current = current.move(direction)
+        }
+    }
+}
 
 /**
  * Returns the neighboring coordinates in all four cardinal [Direction]s.

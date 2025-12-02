@@ -71,9 +71,8 @@ abstract class Challenge(private val partCount: Int) {
     companion object {
         /**
          * Ignore this field.
-         *
-         * TODO: Remove workaround for KT-59723
          */
+        // TODO[Workaround]: Remove when https://youtrack.jetbrains.com/issue/KT-59723 is fixed
         @Suppress("unused")
         private val ignoreMe = Triple(Cardinal, Ordinal, Direction)
     }
