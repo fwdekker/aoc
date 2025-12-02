@@ -1,6 +1,7 @@
 package com.fwdekker.std.maths
 
 import com.fwdekker.containExactlyInSameOrderElementsOf
+import com.fwdekker.std.read
 import com.fwdekker.std.toBigIntegers
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
@@ -8,7 +9,6 @@ import io.kotest.datatest.withData
 import io.kotest.matchers.be
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
-import io.kotest.matchers.resource.resourceAsString
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import java.math.BigInteger
@@ -31,7 +31,7 @@ object SequencesTest : DescribeSpec({
             Variant("Long", { it <= Long.MAX_VALUE.toBigInteger() }, { it.toLong() }),
             Variant("BigInt", { true }, { it }),
         ) { variant ->
-            val expected = resourceAsString("/maths/${method.name}.txt")
+            val expected = read("/maths/${method.name}.txt")
                 .toBigIntegers('\n')
                 .filter(variant.filter)
                 .map(variant.parse)

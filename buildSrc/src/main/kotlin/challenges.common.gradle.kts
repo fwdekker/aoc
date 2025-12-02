@@ -1,3 +1,6 @@
+val libs = extensions.getByType(VersionCatalogsExtension::class.java).named("libs")
+
+
 plugins {
     id("org.jetbrains.kotlin.jvm")
 }
@@ -7,21 +10,20 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.20")
-
-    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
-    testImplementation("io.kotest:kotest-framework-datatest:5.9.1")
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")
+    implementation(libs.findLibrary("kotlin-reflect").get())
+    testImplementation(libs.findBundle("kotest").get())
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(libs.findVersion("java").get().toString().toInt())
 }
 
 tasks.test {
-    systemProperty("kotest.framework.classpath.scanning.autoscan.disable", true)
-    if (project.hasProperty("kotest.tags"))
-        systemProperty("kotest.tags", project.findProperty("kotest.tags")!!)
+    systemProperty("kotest.framework.classpath.scanning.config.disable", "true")
+    systemProperty("kotest.framework.classpath.scanning.autoscan.disable", "true")
+    systemProperty("kotest.framework.disable.test.nested.jar.scanning", "true")
+    systemProperty("kotest.framework.discovery.jar.scan.disable", "true")
+    if (project.hasProperty("kotest.tags")) systemProperty("kotest.tags", project.findProperty("kotest.tags")!!)
 
     useJUnitPlatform {
         includeEngines("kotest")

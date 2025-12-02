@@ -7,7 +7,7 @@ import io.kotest.core.annotation.Tags
 @Tags("2024")
 object Day20Test : ChallengeTest(
     { sample ->
-        // Sample 1 and 2 are the same, but differ in the `minSavings`
+        // Samples 1 and 2 are the same, but differ in the `minSavings`
         when (sample) {
             1 -> Day20(sample, minSavings = 1)
             2 -> Day20(sample, minSavings = 50)

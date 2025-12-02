@@ -1,0 +1,16 @@
+[versions]
+java = "21"  # https://kotlinlang.org/docs/faq.html#which-versions-of-jvm-does-kotlin-target
+kotlin = "2.2.21"  # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
+
+kotest = "6.0.7"  # https://mvnrepository.com/artifact/io.kotest/kotest-assertions-core-jvm
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+[libraries]
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+
+[bundles]
+kotest = ["kotest-assertions-core", "kotest-runner-junit5"]

@@ -49,7 +49,7 @@ abstract class Challenge(private val partCount: Int) {
      */
     fun timeParts(): Sequence<PartResult> =
         sequence {
-            yield(PartResult("Instantiation", "Complete", time.markNow() - mark))
+            yield(PartResult("Init", "Complete", time.markNow() - mark))
             (1..partCount).forEach { partNumber ->
                 val partName = if (partCount == 1) "Solution" else "Part $partNumber"
                 yield(measureTimedValue { runPart(partNumber) }.let { PartResult(partName, it.value, it.duration) })

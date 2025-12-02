@@ -7,7 +7,7 @@ import io.kotest.core.annotation.Tags
 @Tags("2023")
 object Day24Test : ChallengeTest(
     { sample ->
-        if (sample == 1) Day24(sample, 7L..27L)
+        if (sample == 1) Day24(sample, coordinateRange = 7L..27L)
         else Day24(sample)
     },
     listOf(

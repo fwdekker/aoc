@@ -10,7 +10,7 @@ object Day19Test : ChallengeTest(
     listOf(
         case(part = 1, sample = 1) to 19114,
         case(part = 2, sample = 1) to 167409079868000L,
-//        case(part = 1) to 446517,
-//        case(part = 2) to 130090458884662L,
+        case(part = 1) to 446517,
+        case(part = 2) to 130090458884662L,
     )
 )
