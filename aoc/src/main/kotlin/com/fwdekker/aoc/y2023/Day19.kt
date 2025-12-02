@@ -10,7 +10,8 @@ import com.fwdekker.std.read
 import com.fwdekker.std.sections
 
 
-class Day19(resource: String = resource(2023, 19)) : Day() {
+// See https://adventofcode.com/2023/day/19
+class Day19(sample: Int? = null) : Day(year = 2023, day = 19, sample = sample) {
     private val lineSets = read(resource).sections()
     private val workflows = lineSets[0].map { Workflow.fromString(it) }.associateBy { it.name }
     private val parts = lineSets[1].map { Part.fromString(it) }

@@ -5,7 +5,8 @@ import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.read
 
 
-class Day1(resource: String = resource(2023, 1)) : Day() {
+// See https://adventofcode.com/2023/day/1
+class Day1(sample: Int? = null) : Day(year = 2023, day = 1, sample = sample) {
     private val lines = read(resource).linesNotBlank()
 
 

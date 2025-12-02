@@ -7,7 +7,8 @@ import com.fwdekker.std.maths.lcm
 import com.fwdekker.std.read
 
 
-class Day8(resource: String = resource(2023, 8)) : Day() {
+// See https://adventofcode.com/2023/day/8
+class Day8(sample: Int? = null) : Day(year = 2023, day = 8, sample = sample) {
     private val lines = read(resource).linesNotBlank()
 
     private val steps = lines[0].toList()

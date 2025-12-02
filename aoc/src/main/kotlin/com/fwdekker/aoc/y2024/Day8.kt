@@ -15,7 +15,8 @@ import com.fwdekker.std.maths.simplifyRatio
 import com.fwdekker.std.read
 
 
-class Day8(resource: String = resource(2024, 8)) : Day() {
+// See https://adventofcode.com/2024/day/8
+class Day8(sample: Int? = null) : Day(year = 2024, day = 8, sample = sample) {
     private val chart = read(resource).toChart()
 
 

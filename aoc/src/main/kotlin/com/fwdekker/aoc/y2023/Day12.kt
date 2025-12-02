@@ -10,7 +10,8 @@ import com.fwdekker.std.repeat
 import com.fwdekker.std.toInts
 
 
-class Day12(resource: String = resource(2023, 12)) : Day() {
+// See https://adventofcode.com/2023/day/12
+class Day12(sample: Int? = null) : Day(year = 2023, day = 12, sample = sample) {
     private val lines = read(resource).linesNotBlank()
     private val rows = lines.map { it.split(' ').asPair() }.mapSeconds { it.toInts(',') }
 

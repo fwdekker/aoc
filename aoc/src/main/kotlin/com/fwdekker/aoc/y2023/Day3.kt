@@ -17,7 +17,8 @@ import com.fwdekker.std.read
 import kotlin.math.max
 
 
-class Day3(resource: String = resource(2023, 3)) : Day() {
+// See https://adventofcode.com/2023/day/3
+class Day3(sample: Int? = null) : Day(year = 2023, day = 3, sample = sample) {
     private val chart = read(resource).toChart()
 
 

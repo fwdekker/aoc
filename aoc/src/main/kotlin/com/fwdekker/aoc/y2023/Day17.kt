@@ -15,7 +15,8 @@ import com.fwdekker.std.read
 import java.util.PriorityQueue
 
 
-class Day17(resource: String = resource(2023, 17)) : Day() {
+// See https://adventofcode.com/2023/day/17
+class Day17(sample: Int? = null) : Day(year = 2023, day = 17, sample = sample) {
     private val chart = read(resource).toChart()
 
 

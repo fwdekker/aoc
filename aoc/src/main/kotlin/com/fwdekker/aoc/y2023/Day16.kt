@@ -17,7 +17,8 @@ import com.fwdekker.std.grid.width
 import com.fwdekker.std.read
 
 
-class Day16(resource: String = resource(2023, 16)) : Day() {
+// See https://adventofcode.com/2023/day/16
+class Day16(sample: Int? = null) : Day(year = 2023, day = 16, sample = sample) {
     private val chart = read(resource).toChart()
 
 

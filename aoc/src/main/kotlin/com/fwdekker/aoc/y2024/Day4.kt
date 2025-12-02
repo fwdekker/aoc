@@ -17,7 +17,8 @@ import com.fwdekker.std.grid.toChart
 import com.fwdekker.std.read
 
 
-class Day4(resource: String = resource(2024, 4)) : Day() {
+// See https://adventofcode.com/2024/day/4
+class Day4(sample: Int? = null) : Day(year = 2024, day = 4, sample = sample) {
     private val puzzle = read(resource).toChart()
 
 

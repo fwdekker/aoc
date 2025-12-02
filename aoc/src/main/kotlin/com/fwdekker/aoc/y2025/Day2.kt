@@ -10,7 +10,8 @@ import com.fwdekker.std.splitAtIndex
 import com.fwdekker.std.toLongs
 
 
-class Day2(resource: String = resource(2025, 2)) : Day() {
+// See https://adventofcode.com/2025/day/2
+class Day2(sample: Int? = null) : Day(year = 2025, day = 2, sample = sample) {
     private val ranges = read(resource).split(',').map { it.toLongs('-').asPair().asRangeTo() }
 
 

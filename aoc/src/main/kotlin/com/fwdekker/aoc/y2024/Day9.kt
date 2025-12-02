@@ -10,7 +10,8 @@ import com.fwdekker.std.read
 import com.fwdekker.std.toInts
 
 
-class Day9(resource: String = resource(2024, 9)) : Day() {
+// See https://adventofcode.com/2024/day/9
+class Day9(sample: Int? = null) : Day(year = 2024, day = 9, sample = sample) {
     private val diskMap = read(resource).toInts("")
 
 

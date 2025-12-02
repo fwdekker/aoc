@@ -31,7 +31,3 @@ abstract class ChallengeTest(
         fun case(part: Int = 1, sample: Int? = null): Pair<Int, Int?> = Pair(part, sample)
     }
 }
-
-
-@Deprecated("Replace with ChallengeTest.case.", replaceWith = ReplaceWith("ChallengeTest.case(part, sample)"))
-fun case(part: Int = 1, sample: Int? = null): Pair<Int, Int?> = ChallengeTest.case(part, sample)

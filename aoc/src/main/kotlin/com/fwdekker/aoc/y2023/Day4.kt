@@ -8,7 +8,8 @@ import com.fwdekker.std.toInts
 import kotlin.math.pow
 
 
-class Day4(resource: String = resource(2023, 4)) : Day() {
+// See https://adventofcode.com/2023/day/4
+class Day4(sample: Int? = null) : Day(year = 2023, day = 4, sample = sample) {
     private val lines = read(resource).linesNotBlank()
     private val winsByLine =
         lines

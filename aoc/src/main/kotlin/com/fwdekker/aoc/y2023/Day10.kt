@@ -19,7 +19,8 @@ import com.fwdekker.std.grid.toChart
 import com.fwdekker.std.read
 
 
-class Day10(resource: String = resource(2023, 10)) : Day() {
+// See https://adventofcode.com/2023/day/10
+class Day10(sample: Int? = null) : Day(year = 2023, day = 10, sample = sample) {
     private val maze = read(resource).toChart()
 
     private val start = maze.coordsOf('S')

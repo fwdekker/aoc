@@ -9,7 +9,8 @@ import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleGraph
 
 
-class Day25(resource: String = resource(2023, 25)) : Day() {
+// See https://adventofcode.com/2023/day/25
+class Day25(sample: Int? = null) : Day(year = 2023, day = 25, sample = sample) {
     private val graph: Graph<String, DefaultEdge> = SimpleGraph(DefaultEdge::class.java)
 
 

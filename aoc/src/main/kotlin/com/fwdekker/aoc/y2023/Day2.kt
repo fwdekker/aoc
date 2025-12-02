@@ -9,7 +9,8 @@ import com.fwdekker.std.maths.product
 import com.fwdekker.std.read
 
 
-class Day2(resource: String = resource(2023, 2)) : Day() {
+// See https://adventofcode.com/2023/day/2
+class Day2(sample: Int? = null) : Day(year = 2023, day = 2, sample = sample) {
     private val lines = read(resource).linesNotBlank()
     private val limits = mapOf("red" to 12, "green" to 13, "blue" to 14)
     private val colors = limits.keys

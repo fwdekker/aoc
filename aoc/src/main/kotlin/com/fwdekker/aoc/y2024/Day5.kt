@@ -7,7 +7,8 @@ import com.fwdekker.std.sections
 import com.fwdekker.std.toInts
 
 
-class Day5(resource: String = resource(2024, 5)) : Day() {
+// See https://adventofcode.com/2024/day/5
+class Day5(sample: Int? = null) : Day(year = 2024, day = 5, sample = sample) {
     private val sections = read(resource).sections()
     private val rules =
         sections[0]

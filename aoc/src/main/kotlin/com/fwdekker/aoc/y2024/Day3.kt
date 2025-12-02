@@ -5,7 +5,8 @@ import com.fwdekker.std.read
 import com.fwdekker.std.toInts
 
 
-class Day3(resource: String = resource(2024, 3)) : Day() {
+// See https://adventofcode.com/2024/day/3
+class Day3(sample: Int? = null) : Day(year = 2024, day = 3, sample = sample) {
     private val instructions = read(resource)
 
 

@@ -1,7 +1,6 @@
 package com.fwdekker.aoc.y2024
 
 import com.fwdekker.std.ChallengeTest
-import com.fwdekker.std.case
 import io.kotest.core.annotation.Tags
 
 

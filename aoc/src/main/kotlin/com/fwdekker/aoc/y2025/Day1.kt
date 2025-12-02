@@ -9,7 +9,8 @@ import com.fwdekker.std.read
 import com.fwdekker.std.splitAtIndex
 
 
-class Day1(resource: String = resource(2025, 1)) : Day() {
+// See https://adventofcode.com/2025/day/1
+class Day1(sample: Int? = null) : Day(year = 2025, day = 1, sample = sample) {
     private val pairs = read(resource).linesNotBlank().map { it.splitAtIndex(1) }.mapSeconds { it.toInt() }
 
 

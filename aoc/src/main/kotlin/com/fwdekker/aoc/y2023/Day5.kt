@@ -10,7 +10,8 @@ import com.fwdekker.std.sections
 import com.fwdekker.std.toLongs
 
 
-class Day5(resource: String = resource(2023, 5)) : Day() {
+// See https://adventofcode.com/2023/day/5
+class Day5(sample: Int? = null) : Day(year = 2023, day = 5, sample = sample) {
     private val sections = read(resource).sections()
 
     private val seeds: Collection<Long> = sections[0][0].substringAfter(": ").toLongs(' ')

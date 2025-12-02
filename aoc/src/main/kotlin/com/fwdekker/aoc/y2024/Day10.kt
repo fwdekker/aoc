@@ -11,7 +11,8 @@ import com.fwdekker.std.read
 import com.fwdekker.std.toDigits
 
 
-class Day10(resource: String = resource(2024, 10)) : Day() {
+// See https://adventofcode.com/2024/day/10
+class Day10(sample: Int? = null) : Day(year = 2024, day = 10, sample = sample) {
     private val chart = read(resource).linesNotBlank().map { it.toDigits() }
 
 

@@ -7,7 +7,8 @@ import com.fwdekker.std.grid.transpose
 import com.fwdekker.std.read
 
 
-class Day13(resource: String = resource(2023, 13)) : Day() {
+// See https://adventofcode.com/2023/day/13
+class Day13(sample: Int? = null) : Day(year = 2023, day = 13, sample = sample) {
     private val patterns = read(resource).toCharts()
 
 
