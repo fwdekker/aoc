@@ -34,4 +34,4 @@ class Day2(sample: Int? = null) : Day(year = 2025, day = 2, sample = sample) {
 }
 
 
-fun main() = Day1().run()
+fun main() = Day3().run()

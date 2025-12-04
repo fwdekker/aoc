@@ -156,6 +156,22 @@ fun <T> Grid<T>.allCoordsOf(selector: (T) -> Boolean): Sequence<Coords> = allCoo
 
 
 /**
+ * Returns the neighboring [Coords] in all four cardinal [Direction]s that are within this [Grid].
+ */
+fun <T> Grid<T>.cardinals(coords: Coords): List<Coords> = coords.cardinals.filter { it in this }
+
+/**
+ * Returns the neighboring [Coords] in all four ordinal [Direction]s that are within this [Grid].
+ */
+fun <T> Grid<T>.ordinals(coords: Coords): List<Coords> = coords.principals.filter { it in this }
+
+/**
+ * Returns the neighboring [Coords] in all four cardinal and all four ordinal [Direction]s that are within this [Grid].
+ */
+fun <T> Grid<T>.principals(coords: Coords): List<Coords> = coords.principals.filter { it in this }
+
+
+/**
  * Returns `true` if and only if you can move [distance] steps in the given [direction] from [coords] in [this].
  */
 fun <T> Grid<T>.canMove(coords: Coords, direction: Direction, distance: Int = 1): Boolean =
@@ -210,3 +226,9 @@ fun <T> Grid<T>.rotateCCW(): Grid<T> = transpose().flipUD()
  * Rotates halfway around the clock.
  */
 fun <T> Grid<T>.rotateHalf(): Grid<T> = flipLR().flipUD()
+
+
+/**
+ * Returns a mutable copy of this [Grid].
+ */
+fun <T> Grid<T>.mutable(): MutableGrid<T> = map { it.toMutableList() }
