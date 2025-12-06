@@ -1,6 +1,7 @@
 package com.fwdekker.std
 
 import com.fwdekker.std.collections.repeat
+import com.fwdekker.std.maths.toInts
 import java.math.BigInteger
 
 
@@ -18,6 +19,14 @@ fun String.linesNotBlank(): List<String> = lines().filterNotBlank()
  * Splits this string into sections (as separated by [separator]), and each section into lines.
  */
 fun String.sections(separator: String = "\n\n"): List<List<String>> = split(separator).map { it.lines() }
+
+
+/**
+ * Returns all non-blank whitespace-separated sections.
+ */
+fun String.allWords(): List<String> = split(Regex("\\s+")).filterNotBlank()
+
+fun List<String>.allWords(): List<List<String>> = map { it.allWords() }
 
 
 /**
@@ -49,7 +58,7 @@ fun Iterable<String>.toInts(separator: Regex): List<List<Int>> = map { it.toInts
 /**
  * Returns all integers found in the string.
  */
-fun String.allInts(): List<Int> = Regex("-?(?=\\d)?\\d+").findAll(this).map { it.value.toInt() }.toList()
+fun String.allInts(): List<Int> = allLongs().toInts()
 
 fun List<String>.allInts(): List<List<Int>> = map { it.allInts() }
 
@@ -73,6 +82,13 @@ fun Iterable<String>.toLongs(separator: Char): List<List<Long>> = map { it.toLon
 fun Iterable<String>.toLongs(separator: String): List<List<Long>> = map { it.toLongs(separator) }
 
 fun Iterable<String>.toLongs(separator: Regex): List<List<Long>> = map { it.toLongs(separator) }
+
+/**
+ * Returns all longs found in the string.
+ */
+fun String.allLongs(): List<Long> = Regex("-?(?=\\d)?\\d+").findAll(this).map { it.value.toLong() }.toList()
+
+fun List<String>.allLongs(): List<List<Long>> = map { it.allLongs() }
 
 /**
  * Splits by [separator] and converts each entry to a [BigInteger].

@@ -241,6 +241,11 @@ fun <A, B, C> Triple<A, B, C>.noneDistinct(): Boolean = first == second && first
 fun <T> List<T>.without(idx: Int): MutableList<T> = toMutableList().also { it.removeAt(idx) }
 
 /**
+ * Returns a copy of this list in which the last element is mapped according to [modify].
+ */
+fun <T> List<T>.mapLast(modify: (T) -> T): List<T> = toMutableList().also { it[lastIndex] = modify(it.last()) }
+
+/**
  * Swaps the elements at [idx1] and [idx2], and returns [this] list.
  */
 fun <T> MutableList<T>.swapAt(idx1: Int, idx2: Int): MutableList<T> {
