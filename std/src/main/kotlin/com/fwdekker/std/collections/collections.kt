@@ -18,11 +18,20 @@ fun <T> List<T>.getMod(index: Int): T = this[index.wrapMod(size)]
 
 
 /**
- * Returns the left-folded addition of all contained maps.
+ * Returns the left-folded addition of all contained maps; if a collision occurs, only the last insertion is retained.
  */
-fun <K, V> Sequence<Map<K, V>>.sum(): Map<K, V> = fold(emptyMap()) { acc, it -> acc + it }
+fun <K, V> Sequence<Map<K, V>>.foldSum(): Map<K, V> = foldSum { _, it -> it }
 
-fun <K, V> Iterable<Map<K, V>>.sum(): Map<K, V> = fold(emptyMap()) { acc, it -> acc + it }
+fun <K, V> Iterable<Map<K, V>>.foldSum(): Map<K, V> = foldSum { _, it -> it }
+
+/**
+ * Returns the left-folded addition of all contained maps; if a collision occurs, elements are [combine]d.
+ */
+fun <K, V> Sequence<Map<K, V>>.foldSum(combine: (V?, V) -> V): Map<K, V> =
+    mutableMapOf<K, V>().also { acc -> flatten().forEach { (k, v) -> acc[k] = combine(acc[k], v) } }
+
+fun <K, V> Iterable<Map<K, V>>.foldSum(combine: (V?, V) -> V): Map<K, V> =
+    mutableMapOf<K, V>().also { acc -> flatten().forEach { (k, v) -> acc[k] = combine(acc[k], v) } }
 
 
 /**
@@ -313,6 +322,13 @@ fun <T, R> MutableList<T>.appendingFold(initial: R, operation: (MutableList<T>, 
  */
 fun <K, V> MutableMap<K, V>.with(key: K, value: V): MutableMap<K, V> = this.also { put(key, value) }
 
+
+/**
+ * Returns all pairs of all maps.
+ */
+fun <K, V> Sequence<Map<K, V>>.flatten(): Sequence<Pair<K, V>> = flatMap { it.toList() }
+
+fun <K, V> Iterable<Map<K, V>>.flatten(): Iterable<Pair<K, V>> = flatMap { it.toList() }
 
 /**
  * Folds the elements of this map.

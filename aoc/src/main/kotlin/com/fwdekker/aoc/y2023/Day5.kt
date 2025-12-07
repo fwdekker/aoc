@@ -1,7 +1,7 @@
 package com.fwdekker.aoc.y2023
 
 import com.fwdekker.aoc.Day
-import com.fwdekker.std.collections.sum
+import com.fwdekker.std.collections.foldSum
 import com.fwdekker.std.maths.overlap
 import com.fwdekker.std.maths.shift
 import com.fwdekker.std.maths.without
@@ -33,7 +33,7 @@ class Day5(sample: Int? = null) : Day(year = 2023, day = 5, sample = sample) {
             .fold(seedRanges) { categories, lines ->
                 lines.drop(1)
                     .map { it.asRangeMapper() }
-                    .fold(categories.associateWith { it }) { acc, mapper -> acc.map(mapper).sum() }
+                    .fold(categories.associateWith { it }) { acc, mapper -> acc.map(mapper).foldSum() }
                     .values
             }
             .minOf { it.first }

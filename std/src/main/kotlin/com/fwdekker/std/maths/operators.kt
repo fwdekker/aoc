@@ -2,7 +2,7 @@
 package com.fwdekker.std.maths
 
 import com.fwdekker.std.collections.map
-import com.fwdekker.std.collections.sum
+import com.fwdekker.std.collections.foldSum
 import java.math.BigDecimal
 import java.math.BigInteger
 import kotlin.experimental.ExperimentalTypeInference
@@ -108,7 +108,7 @@ fun Sequence<Pair<BigDecimal, BigDecimal>>.sum(): Pair<BigDecimal, BigDecimal> =
 fun Iterable<Pair<BigDecimal, BigDecimal>>.sum(): Pair<BigDecimal, BigDecimal> = asSequence().sum()
 
 /**
- * Shorthand for invoking [map] and then [sum].
+ * Shorthand for invoking [map] and then [foldSum].
  */
 @JvmName("intSumOf")
 @OptIn(ExperimentalTypeInference::class)
@@ -152,7 +152,7 @@ fun <T> Collection<T>.sumOfIndexed(transform: (Int, T) -> BigInteger): BigIntege
     withIndex().sumOf { (idx, element) -> transform(idx, element) }
 
 /**
- * Shorthand for invoking [filter] and then [sum].
+ * Shorthand for invoking [filter] and then [foldSum].
  */
 fun Sequence<Int>.sumIf(predicate: (Int) -> Boolean): Int = filter(predicate).sum()
 

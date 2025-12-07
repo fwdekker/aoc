@@ -2,7 +2,7 @@
 package com.fwdekker.std.maths
 
 import com.fwdekker.std.collections.mapSecond
-import com.fwdekker.std.collections.sum
+import com.fwdekker.std.collections.foldSum
 import java.util.ArrayDeque
 import java.util.Deque
 import java.util.PriorityQueue
@@ -80,7 +80,7 @@ abstract class Graph<N : Any> {
      * Returns the [distance] between each pair of [nodes].
      */
     fun distances(): Map<Pair<N, N>, Long?> =
-        nodes.map { start -> distances(start).map { (start to it.key) to it.value }.toMap() }.sum()
+        nodes.map { start -> distances(start).map { (start to it.key) to it.value }.toMap() }.foldSum()
 
     /**
      * Returns the shortest path from [start] to [end], or `null` if there is no such path.
@@ -110,7 +110,7 @@ abstract class Graph<N : Any> {
      * Returns the [shortestPath] between each pair of [nodes].
      */
     fun shortestPaths(): Map<Pair<N, N>, List<N>?> =
-        nodes.map { start -> shortestPaths(start).map { (start to it.key) to it.value }.toMap() }.sum()
+        nodes.map { start -> shortestPaths(start).map { (start to it.key) to it.value }.toMap() }.foldSum()
 
     /**
      * Runs Dijkstra's algorithm on the graph, starting at [start].
