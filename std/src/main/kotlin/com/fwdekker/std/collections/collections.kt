@@ -211,6 +211,26 @@ fun <T> Sequence<T>.cyclic(): Sequence<T> = sequence { while (true) yieldAll(thi
 fun <T> Iterable<T>.cyclic(): Sequence<T> = asSequence().cyclic()
 
 /**
+ * Without modifying [this], first returns all elements except the first [amount], and then returns those first
+ * [amount] elements.
+ *
+ * For example, left-shifting `012345` by 3 will return in the order `3450123`.
+ */
+fun <T> Iterable<T>.leftShifted(amount: Int): Sequence<T> =
+    sequence {
+        yieldAll(drop(amount))
+        yieldAll(take(amount))
+    }
+
+/**
+ * Like [leftShifted], but in the other direction.
+ *
+ * Requires turning this into a [Collection] first, because you cannot return the last elements first without knowing
+ * how many elements there are.
+ */
+fun <T> Iterable<T>.rightShifted(amount: Int): Sequence<T> = toList().let { it.leftShifted(it.size - amount) }
+
+/**
  * Returns `false` if an element occurs more than once, or `true` if all elements are unique. Assumes transitive
  * equality.
  *

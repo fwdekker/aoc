@@ -1,4 +1,5 @@
 @file:Suppress("unused")
+
 package com.fwdekker.std.maths
 
 import java.math.BigInteger
@@ -47,25 +48,51 @@ fun fibonacciNumbersBigInt(): Sequence<BigInteger> =
  *
  * The `i`-th triangle number is `1 + 2 + ... + i`.
  */
-fun triangleNumbersInt(): Sequence<Int> =
+fun triangleNumbersInt(): Sequence<Int> = polygonalNumbersInt(3)
+
+fun triangleNumbersLong(): Sequence<Long> = polygonalNumbersLong(3)
+
+fun triangleNumbersBigInt(): Sequence<BigInteger> = polygonalNumbersBigInt(3.toBigInteger())
+
+/**
+ * Returns an infinite sequence of all [n]-gonal numbers, starting with 1, [n], ...
+ *
+ * For example, for [n] equals 3, this returns the triangle numbers: 1, 3, 6, 10, 15, ... The `i`-th triangle number is
+ * `1 + 2 + ... + i`.
+ *
+ * And for [n] equals 4, this returns the square numbers: 1, 4, 9, 16, 25, ...
+ */
+fun polygonalNumbersInt(n: Int): Sequence<Int> =
     sequence {
         var sum = 1
-        var inc = 2
-        while (true) yield(sum.also { sum += inc++ })
+        var step = n - 1
+        while (true) {
+            yield(sum)
+            sum += step
+            step += n - 2
+        }
     }
 
-fun triangleNumbersLong(): Sequence<Long> =
+fun polygonalNumbersLong(n: Long): Sequence<Long> =
     sequence {
         var sum = 1L
-        var inc = 2L
-        while (true) yield(sum.also { sum += inc++ })
+        var step = n - 1L
+        while (true) {
+            yield(sum)
+            sum += step
+            step += n - 2L
+        }
     }
 
-fun triangleNumbersBigInt(): Sequence<BigInteger> =
+fun polygonalNumbersBigInt(n: BigInteger): Sequence<BigInteger> =
     sequence {
         var sum = BigInteger.ONE
-        var inc = BigInteger.TWO
-        while (true) yield(sum.also { sum += inc++ })
+        var step = n - BigInteger.ONE
+        while (true) {
+            yield(sum)
+            sum += step
+            step += n - BigInteger.TWO
+        }
     }
 
 
