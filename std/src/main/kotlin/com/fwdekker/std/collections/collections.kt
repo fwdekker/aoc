@@ -40,6 +40,15 @@ fun <K, V> Iterable<Map<K, V>>.foldSum(combine: (V?, V) -> V): Map<K, V> =
 fun <A, B> Pair<A, B>.swap(): Pair<B, A> = Pair(second, first)
 
 /**
+ * Swaps the entries if the [Pair.first] is smaller than the [Pair.second].
+ */
+fun <A : Comparable<A>> Pair<A, A>.sorted(): Pair<A, A> =
+    if (first > second) swap() else this
+
+fun <A> Pair<A, A>.sorted(comparator: Comparator<A>): Pair<A, A> =
+    if (comparator.compare(first, second) > 0) swap() else this
+
+/**
  * Returns the first element of each pair.
  */
 @JvmName("pairFirsts")
@@ -270,9 +279,14 @@ fun <A, B, C> Triple<A, B, C>.noneDistinct(): Boolean = first == second && first
 fun <T> List<T>.without(idx: Int): MutableList<T> = toMutableList().also { it.removeAt(idx) }
 
 /**
+ * Returns a copy of this list in which the [idx]th element is mapped according to [modify].
+ */
+fun <T> List<T>.mapAt(idx: Int, modify: (T) -> T): List<T> = toMutableList().also { it[idx] = modify(it[idx]) }
+
+/**
  * Returns a copy of this list in which the last element is mapped according to [modify].
  */
-fun <T> List<T>.mapLast(modify: (T) -> T): List<T> = toMutableList().also { it[lastIndex] = modify(it.last()) }
+fun <T> List<T>.mapLast(modify: (T) -> T): List<T> = mapAt(lastIndex, modify)
 
 /**
  * Swaps the elements at [idx1] and [idx2], and returns [this] list.
