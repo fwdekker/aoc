@@ -190,6 +190,55 @@ fun <A, B, C, T> Iterable<Triple<A, B, C>>.mapThirds(transform: (C) -> T): List<
     map { it.mapThird(transform) }
 
 /**
+ * Retains only tuples of which the first entry matches the [condition].
+ */
+@JvmName("sequencePairFilterFirsts")
+fun <A, B> Sequence<Pair<A, B>>.filterFirsts(condition: (A) -> Boolean): Sequence<Pair<A, B>> =
+    filter { condition(it.first) }
+
+@JvmName("iterablePairFilterFirsts")
+fun <A, B> Iterable<Pair<A, B>>.filterFirsts(condition: (A) -> Boolean): List<Pair<A, B>> =
+    filter { condition(it.first) }
+
+@JvmName("sequenceTripleFilterFirsts")
+fun <A, B, C> Sequence<Triple<A, B, C>>.filterFirsts(condition: (A) -> Boolean): Sequence<Triple<A, B, C>> =
+    filter { condition(it.first) }
+
+@JvmName("iterableTripleFilterFirsts")
+fun <A, B, C> Iterable<Triple<A, B, C>>.filterFirsts(condition: (A) -> Boolean): List<Triple<A, B, C>> =
+    filter { condition(it.first) }
+
+/**
+ * Retains only tuples of which the second entry matches the [condition].
+ */
+@JvmName("sequencePairFilterSeconds")
+fun <A, B> Sequence<Pair<A, B>>.filterSeconds(condition: (B) -> Boolean): Sequence<Pair<A, B>> =
+    filter { condition(it.second) }
+
+@JvmName("iterablePairFilterSeconds")
+fun <A, B> Iterable<Pair<A, B>>.filterSeconds(condition: (B) -> Boolean): List<Pair<A, B>> =
+    filter { condition(it.second) }
+
+@JvmName("sequenceTripleFilterSeconds")
+fun <A, B, C> Sequence<Triple<A, B, C>>.filterSeconds(condition: (B) -> Boolean): Sequence<Triple<A, B, C>> =
+    filter { condition(it.second) }
+
+@JvmName("iterableTripleFilterSeconds")
+fun <A, B, C> Iterable<Triple<A, B, C>>.filterSeconds(condition: (B) -> Boolean): List<Triple<A, B, C>> =
+    filter { condition(it.second) }
+
+/**
+ * Retains only tuples of which the third entry matches the [condition].
+ */
+@JvmName("sequenceTripleFilterThirds")
+fun <A, B, C> Sequence<Triple<A, B, C>>.filterThirds(condition: (C) -> Boolean): Sequence<Triple<A, B, C>> =
+    filter { condition(it.third) }
+
+@JvmName("iterableTripleFilterThirds")
+fun <A, B, C> Iterable<Triple<A, B, C>>.filterThirds(condition: (C) -> Boolean): List<Triple<A, B, C>> =
+    filter { condition(it.third) }
+
+/**
  * Returns a pair containing the first two elements.
  */
 fun <T> List<T>.asPair(): Pair<T, T> = Pair(this[0], this[1])

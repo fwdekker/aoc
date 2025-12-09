@@ -46,7 +46,6 @@ class Day18(sample: Int? = null) : Day(year = 2023, day = 18, sample = sample) {
         val interiorPoints = (area + 1 - boundaryLength / 2).roundToLong()
         return interiorPoints + boundaryLength
     }
-
 }
 
 

@@ -143,6 +143,12 @@ fun <T> List<T>.powerSet(minSize: Int = 0, maxSize: Int = this.size): Sequence<L
 fun <T> Collection<T>.powerSet(minSize: Int = 0, maxSize: Int = this.size): Sequence<List<T>> =
     toList().powerSet(minSize, maxSize)
 
+/**
+ * Returns all unique pairs of elements. Equivalent to [powerSet] with exact size 2, but faster.
+ */
+fun <T> Collection<T>.allPairs(): Sequence<Pair<T, T>> =
+    asSequence().flatMapIndexed { idx, a -> asSequence().drop(idx + 1).map { b -> a to b } }
+
 
 /**
  * Returns the number of occurrences for each element.
