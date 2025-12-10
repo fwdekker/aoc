@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation(project(":std"))
     implementation("org.jgrapht:jgrapht-core:1.5.2")
+    implementation("tools.aqua:z3-turnkey:4.14.1")
 
     testImplementation(project(":std", "test"))
 }
