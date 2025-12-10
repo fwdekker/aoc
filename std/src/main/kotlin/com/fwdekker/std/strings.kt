@@ -2,6 +2,7 @@ package com.fwdekker.std
 
 import com.fwdekker.std.collections.repeat
 import com.fwdekker.std.maths.toInts
+import java.math.BigDecimal
 import java.math.BigInteger
 
 
@@ -38,21 +39,15 @@ fun String.toDigits(): List<Int> = map { it.digitToInt() }
  * Splits by [separator] and converts each entry to an [Int].
  */
 fun String.toInts(separator: Char): List<Int> = toInts(separator.toString())
-
-fun String.toInts(separator: String): List<Int> = split(separator).filterNotBlank().map { it.toInt() }
-
-fun String.toInts(separator: Regex): List<Int> = split(separator).filterNotBlank().map { it.toInt() }
+fun String.toInts(separator: String): List<Int> = split(separator).filterNotBlank().map { it.trim().toInt() }
+fun String.toInts(separator: Regex): List<Int> = split(separator).filterNotBlank().map { it.trim().toInt() }
 
 fun Sequence<String>.toInts(separator: Char): Sequence<List<Int>> = map { it.toInts(separator) }
-
 fun Sequence<String>.toInts(separator: String): Sequence<List<Int>> = map { it.toInts(separator) }
-
 fun Sequence<String>.toInts(separator: Regex): Sequence<List<Int>> = map { it.toInts(separator) }
 
 fun Iterable<String>.toInts(separator: Char): List<List<Int>> = map { it.toInts(separator) }
-
 fun Iterable<String>.toInts(separator: String): List<List<Int>> = map { it.toInts(separator) }
-
 fun Iterable<String>.toInts(separator: Regex): List<List<Int>> = map { it.toInts(separator) }
 
 /**
@@ -66,21 +61,15 @@ fun List<String>.allInts(): List<List<Int>> = map { it.allInts() }
  * Splits by [separator] and converts each entry to a [Long].
  */
 fun String.toLongs(separator: Char): List<Long> = toLongs(separator.toString())
-
-fun String.toLongs(separator: String): List<Long> = split(separator).filterNotBlank().map { it.toLong() }
-
-fun String.toLongs(separator: Regex): List<Long> = split(separator).filterNotBlank().map { it.toLong() }
+fun String.toLongs(separator: String): List<Long> = split(separator).filterNotBlank().map { it.trim().toLong() }
+fun String.toLongs(separator: Regex): List<Long> = split(separator).filterNotBlank().map { it.trim().toLong() }
 
 fun Sequence<String>.toLongs(separator: Char): Sequence<List<Long>> = map { it.toLongs(separator) }
-
 fun Sequence<String>.toLongs(separator: String): Sequence<List<Long>> = map { it.toLongs(separator) }
-
 fun Sequence<String>.toLongs(separator: Regex): Sequence<List<Long>> = map { it.toLongs(separator) }
 
 fun Iterable<String>.toLongs(separator: Char): List<List<Long>> = map { it.toLongs(separator) }
-
 fun Iterable<String>.toLongs(separator: String): List<List<Long>> = map { it.toLongs(separator) }
-
 fun Iterable<String>.toLongs(separator: Regex): List<List<Long>> = map { it.toLongs(separator) }
 
 /**
@@ -94,22 +83,31 @@ fun List<String>.allLongs(): List<List<Long>> = map { it.allLongs() }
  * Splits by [separator] and converts each entry to a [BigInteger].
  */
 fun String.toBigIntegers(separator: Char): List<BigInteger> = toBigIntegers(separator.toString())
-
-fun String.toBigIntegers(separator: String): List<BigInteger> = split(separator).filterNotBlank().map { it.toBigInteger() }
-
-fun String.toBigIntegers(separator: Regex): List<BigInteger> = split(separator).filterNotBlank().map { it.toBigInteger() }
+fun String.toBigIntegers(separator: String): List<BigInteger> = split(separator).filterNotBlank().map { it.trim().toBigInteger() }
+fun String.toBigIntegers(separator: Regex): List<BigInteger> = split(separator).filterNotBlank().map { it.trim().toBigInteger() }
 
 fun Sequence<String>.toBigIntegers(separator: Char): Sequence<List<BigInteger>> = map { it.toBigIntegers(separator) }
-
 fun Sequence<String>.toBigIntegers(separator: String): Sequence<List<BigInteger>> = map { it.toBigIntegers(separator) }
-
 fun Sequence<String>.toBigIntegers(separator: Regex): Sequence<List<BigInteger>> = map { it.toBigIntegers(separator) }
 
 fun Iterable<String>.toBigIntegers(separator: Char): List<List<BigInteger>> = map { it.toBigIntegers(separator) }
-
 fun Iterable<String>.toBigIntegers(separator: String): List<List<BigInteger>> = map { it.toBigIntegers(separator) }
-
 fun Iterable<String>.toBigIntegers(separator: Regex): List<List<BigInteger>> = map { it.toBigIntegers(separator) }
+
+/**
+ * Splits by [separator] and converts each entry to a [BigDecimal].
+ */
+fun String.toBigDecimals(separator: Char): List<BigDecimal> = toBigDecimals(separator.toString())
+fun String.toBigDecimals(separator: String): List<BigDecimal> = split(separator).filterNotBlank().map { it.trim().toBigDecimal() }
+fun String.toBigDecimals(separator: Regex): List<BigDecimal> = split(separator).filterNotBlank().map { it.trim().toBigDecimal() }
+
+fun Sequence<String>.toBigDecimals(separator: Char): Sequence<List<BigDecimal>> = map { it.toBigDecimals(separator) }
+fun Sequence<String>.toBigDecimals(separator: String): Sequence<List<BigDecimal>> = map { it.toBigDecimals(separator) }
+fun Sequence<String>.toBigDecimals(separator: Regex): Sequence<List<BigDecimal>> = map { it.toBigDecimals(separator) }
+
+fun Iterable<String>.toBigDecimals(separator: Char): List<List<BigDecimal>> = map { it.toBigDecimals(separator) }
+fun Iterable<String>.toBigDecimals(separator: String): List<List<BigDecimal>> = map { it.toBigDecimals(separator) }
+fun Iterable<String>.toBigDecimals(separator: Regex): List<List<BigDecimal>> = map { it.toBigDecimals(separator) }
 
 
 /**

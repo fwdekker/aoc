@@ -5,16 +5,13 @@ import com.fwdekker.std.collections.asTriple
 import com.fwdekker.std.collections.mapAt
 import com.fwdekker.std.collections.sorted
 import com.fwdekker.std.collections.without
-import com.fwdekker.std.grid.Coords3
-import com.fwdekker.std.grid.compareTo
-import com.fwdekker.std.grid.x
-import com.fwdekker.std.grid.y
-import com.fwdekker.std.grid.z
 import com.fwdekker.std.linesNotBlank
+import com.fwdekker.std.maths.Vec3
+import com.fwdekker.std.maths.compareTo
+import com.fwdekker.std.maths.distance
 import com.fwdekker.std.maths.productOf
 import com.fwdekker.std.read
 import com.fwdekker.std.toLongs
-import kotlin.math.pow
 
 
 // See https://adventofcode.com/2025/day/8
@@ -24,9 +21,9 @@ class Day8(sample: Int? = null, private val connections: Int = 1_000) : Day(year
     private val spanning =
         boxes
             .flatMapIndexed { idx, box -> boxes.drop(idx + 1).map { box to it } }
-            .sortedBy { it.first.distanceTo(it.second) }
+            .sortedBy { it.first.distance(it.second) }
             .let { pairs ->
-                val seen = mutableSetOf<Coords3>()
+                val seen = mutableSetOf<Vec3<Long>>()
 
                 pairs.takeWhile { (from, to) ->
                     (seen.size != boxes.size).also {
@@ -41,7 +38,7 @@ class Day8(sample: Int? = null, private val connections: Int = 1_000) : Day(year
         spanning
             .distinctBy { it.sorted { p1, p2 -> p1.compareTo(p2) } }
             .take(connections)
-            .fold(listOf<Set<Coords3>>()) { circuits, (from, to) ->
+            .fold(listOf<Set<Vec3<Long>>>()) { circuits, (from, to) ->
                 val fromIdx = circuits.indexOfFirst { it.contains(from) }
                 val toIdx = circuits.indexOfFirst { it.contains(to) }
 
@@ -56,13 +53,7 @@ class Day8(sample: Int? = null, private val connections: Int = 1_000) : Day(year
             .productOf { it.size }
 
     override fun part2(): Long =
-        spanning.last().let { it.first.x * it.second.x }
-
-
-    private fun Coords3.distanceTo(other: Coords3): Double =
-        (this.x - other.x).toDouble().pow(2) +
-            (this.y - other.y).toDouble().pow(2) +
-            (this.z - other.z).toDouble().pow(2)
+        spanning.last().let { it.first.first * it.second.first }
 }
 
 

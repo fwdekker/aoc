@@ -148,3 +148,13 @@ fun IntRange.shift(by: Int): IntRange = this.first + by..this.last + by
  * Increases the start and end of the range by [by].
  */
 fun LongRange.shift(by: Long): LongRange = this.first + by..this.last + by
+
+
+/**
+ * Returns `true` if and only if this range contains the given [value].
+ */
+operator fun IntRange.contains(value: Double): Boolean = first <= value && value <= last
+operator fun IntRange.contains(value: Float): Boolean = first <= value && value <= last
+
+operator fun LongRange.contains(value: Float): Boolean = first <= value && value <= last
+operator fun LongRange.contains(value: Double): Boolean = first <= value && value <= last
