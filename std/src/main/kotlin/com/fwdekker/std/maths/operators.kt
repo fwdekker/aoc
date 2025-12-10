@@ -6,6 +6,9 @@ import com.fwdekker.std.collections.foldSum
 import java.math.BigDecimal
 import java.math.BigInteger
 import kotlin.experimental.ExperimentalTypeInference
+import kotlin.math.pow
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 import kotlin.time.Duration
 
 
@@ -308,15 +311,11 @@ fun <T> Iterable<T>.productOf(transform: (T) -> BigDecimal): BigDecimal = map(tr
 /**
  * Calculates [this] to the power of some non-negative [exponent].
  */
-@Deprecated("Super duper slow! Rename this to `powExact` or `powSafe` or sth, and add `pow` which can fail.") // TODO
-fun Int.pow(exponent: Int): Int = toBigInteger().pow(exponent).toIntExact()
+fun Int.powInt(exponent: Int): Int = toDouble().pow(exponent.toDouble()).roundToInt()
 
-@Deprecated("Super duper slow! Rename this to `powExact` or `powSafe` or sth, and add `pow` which can fail.") // TODO
-fun Long.pow(exponent: Int): Long {
-    require(exponent >= 0) { "Cannot calculate negative exponent on integer number." }
+fun Int.powLong(exponent: Int): Long = toDouble().pow(exponent.toDouble()).roundToLong()
 
-    return toBigInteger().pow(exponent).toLongExact()
-}
+fun Long.powLong(exponent: Int): Long = toDouble().pow(exponent.toDouble()).roundToLong()
 
 
 /**

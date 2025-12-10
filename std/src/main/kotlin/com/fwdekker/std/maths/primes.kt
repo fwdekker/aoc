@@ -220,7 +220,7 @@ fun seededPrimes(n: Int): CachedSequence<Long> {
 
     (2..floorSqrt(n))
         .filter { sieve[it] }
-        .forEach { number -> (number.pow(2)..<n).step(number).forEach { sieve[it] = false } }
+        .forEach { number -> (number.powInt(2)..<n).step(number).forEach { sieve[it] = false } }
 
     primes.insert(sieve.stream().toList().toLongs())
     return primes
