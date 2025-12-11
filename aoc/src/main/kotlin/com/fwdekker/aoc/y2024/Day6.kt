@@ -26,7 +26,7 @@ class Day6(sample: Int? = null) : Day(year = 2024, day = 6, sample = sample) {
         return coords.withIndex()
             .filter { (_, it) -> it != start }
             .filter { (idx, it) -> it !in coords.take(idx) }
-            .count { (idx, it) -> patrol(route[idx - 1], it).allDistinct() }
+            .count { (idx, it) -> !patrol(route[idx - 1], it).allDistinct() }
     }
 
 

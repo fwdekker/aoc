@@ -4,9 +4,10 @@ import com.fwdekker.aoc.Day
 import com.fwdekker.std.collections.asPair
 import com.fwdekker.std.collections.noneDistinct
 import com.fwdekker.std.maths.asRangeTo
+import com.fwdekker.std.maths.length
+import com.fwdekker.std.maths.splitAtIndex
 import com.fwdekker.std.maths.sumIf
 import com.fwdekker.std.read
-import com.fwdekker.std.splitAtIndex
 import com.fwdekker.std.toLongs
 
 
@@ -17,11 +18,7 @@ class Day2(sample: Int? = null) : Day(year = 2025, day = 2, sample = sample) {
 
     override fun part1(): Long =
         ranges.flatMap { range ->
-            range
-                .filter { id ->
-                    val str = id.toString()
-                    str.length % 2 == 0 && str.splitAtIndex(str.length / 2).noneDistinct()
-                }
+            range.filter { id -> id.length() % 2 == 0 && id.splitAtIndex(id.length() / 2).noneDistinct() }
         }.sum()
 
     override fun part2(): Long =

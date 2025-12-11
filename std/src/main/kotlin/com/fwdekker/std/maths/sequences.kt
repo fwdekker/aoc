@@ -123,6 +123,12 @@ class CachedSequence<T : Comparable<T>>(base: Sequence<T>) : MonotonicSequence<T
     private lateinit var max: T
 
 
+    /**
+     * Returns all elements that have previously been iterated over.
+     */
+    val history: List<T> = asList
+
+
     override operator fun get(index: Int): T {
         require(index >= 0) { "Index must be non-negative." }
 

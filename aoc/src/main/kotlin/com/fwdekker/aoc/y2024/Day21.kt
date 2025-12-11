@@ -196,6 +196,7 @@ class Day21(sample: Int? = null) : Day(year = 2024, day = 21, sample = sample) {
     private val codeToKeysCache = mutableMapOf<String, List<String>>()
 
 
+    // TODO: Improve memory efficiency
     override fun part1() = calculateComplexity(2)
 
     // TODO: Implement this; current implementation does not finish

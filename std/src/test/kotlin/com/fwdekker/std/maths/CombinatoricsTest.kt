@@ -10,7 +10,7 @@ import io.kotest.matchers.should
 
 
 /**
- * Unit tests for `combinators.kt`.
+ * Unit tests for `combinatorics.kt`.
  */
 object CombinatoricsTest : DescribeSpec({
     describe("factorial") {

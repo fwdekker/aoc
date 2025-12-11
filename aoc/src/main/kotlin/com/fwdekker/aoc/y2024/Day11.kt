@@ -2,10 +2,10 @@ package com.fwdekker.aoc.y2024
 
 import com.fwdekker.aoc.Day
 import com.fwdekker.std.collections.fold
-import com.fwdekker.std.collections.map
 import com.fwdekker.std.foldSelf
+import com.fwdekker.std.maths.length
+import com.fwdekker.std.maths.splitAtIndex
 import com.fwdekker.std.sections
-import com.fwdekker.std.splitAtIndex
 import com.fwdekker.std.toLongs
 
 
@@ -24,11 +24,9 @@ class Day11(sample: Int? = null) : Day(year = 2024, day = 11, sample = sample) {
     private fun blink(times: Int, stones: List<Long>): Map<Long, Long> =
         stones.associateWith { 1L }.foldSelf(times) { currentStones ->
             currentStones.fold(mutableMapOf<Long, Long>().withDefault { 0L }) { acc, (stone, count) ->
-                val stoneStr = stone.toString()
-
                 when {
                     stone == 0L -> listOf(1L)
-                    stoneStr.length % 2 == 0 -> stoneStr.splitAtIndex(stoneStr.length / 2).map { it.toLong() }.toList()
+                    stone.length() % 2 == 0 -> stone.splitAtIndex(stone.length() / 2).toList()
                     else -> listOf(stone * 2024L)
                 }.forEach { acc[it] = acc.getValue(it) + count }
 

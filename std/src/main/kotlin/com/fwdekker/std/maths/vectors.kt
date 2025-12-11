@@ -259,28 +259,43 @@ fun BDVec3.cross(that: BDVec3): BDVec3 = cross().matDot(that)
  * Returns the [norm]-distance between [this] and [that], calculated as `norm(this - that)`.
  */
 @JvmName("intDistance")
-fun IVec.distance(that: IVec, norm: (Iterable<Int>) -> Int = { it.norm1() }): Int = norm(vecMinus(that))
+fun IVec.distance(that: IVec) = distance(that) { it.norm1() }
 @JvmName("intDistance")
-fun IVec2.distance(that: IVec2, norm: (Iterable<Int>) -> Int = { it.norm1() }): Int = norm(vecMinus(that).toList())
+fun <T> IVec.distance(that: IVec, norm: (Iterable<Int>) -> T): T = norm(vecMinus(that))
 @JvmName("intDistance")
-fun IVec3.distance(that: IVec3, norm: (Iterable<Int>) -> Int = { it.norm1() }): Int = norm(vecMinus(that).toList())
+fun IVec2.distance(that: IVec2) = distance(that) { it.norm1() }
+@JvmName("intDistance")
+fun <T> IVec2.distance(that: IVec2, norm: (Iterable<Int>) -> T): T = norm(vecMinus(that).toList())
+@JvmName("intDistance")
+fun IVec3.distance(that: IVec3) = distance(that) { it.norm1() }
+@JvmName("intDistance")
+fun <T> IVec3.distance(that: IVec3, norm: (Iterable<Int>) -> T): T = norm(vecMinus(that).toList())
 
 @JvmName("longDistance")
-fun LVec.distance(that: LVec, norm: (Iterable<Long>) -> Long = { it.norm1() }): Long = norm(vecMinus(that))
+fun LVec.distance(that: LVec) = distance(that) { it.norm1() }
 @JvmName("longDistance")
-fun LVec2.distance(that: LVec2, norm: (Iterable<Long>) -> Long = { it.norm1() }): Long = norm(vecMinus(that).toList())
+fun <T> LVec.distance(that: LVec, norm: (Iterable<Long>) -> T): T = norm(vecMinus(that))
 @JvmName("longDistance")
-fun LVec3.distance(that: LVec3, norm: (Iterable<Long>) -> Long = { it.norm1() }): Long = norm(vecMinus(that).toList())
+fun LVec2.distance(that: LVec2) = distance(that) { it.norm1() }
+@JvmName("longDistance")
+fun <T> LVec2.distance(that: LVec2, norm: (Iterable<Long>) -> T): T = norm(vecMinus(that).toList())
+@JvmName("longDistance")
+fun LVec3.distance(that: LVec3) = distance(that) { it.norm1() }
+@JvmName("longDistance")
+fun <T> LVec3.distance(that: LVec3, norm: (Iterable<Long>) -> T): T = norm(vecMinus(that).toList())
 
 @JvmName("bigDecimalDistance")
-fun BDVec.distance(that: BDVec, norm: (Iterable<BigDecimal>) -> BigDecimal = { it.norm1() }): BigDecimal =
-    norm(vecMinus(that))
+fun BDVec.distance(that: BDVec) = distance(that) { it.norm1() }
 @JvmName("bigDecimalDistance")
-fun BDVec2.distance(that: BDVec2, norm: (Iterable<BigDecimal>) -> BigDecimal = { it.norm1() }): BigDecimal =
-    norm(vecMinus(that).toList())
+fun <T> BDVec.distance(that: BDVec, norm: (Iterable<BigDecimal>) -> T): T = norm(vecMinus(that))
 @JvmName("bigDecimalDistance")
-fun BDVec3.distance(that: BDVec3, norm: (Iterable<BigDecimal>) -> BigDecimal = { it.norm1() }): BigDecimal =
-    norm(vecMinus(that).toList())
+fun BDVec2.distance(that: BDVec2) = distance(that) { it.norm1() }
+@JvmName("bigDecimalDistance")
+fun <T> BDVec2.distance(that: BDVec2, norm: (Iterable<BigDecimal>) -> T): T = norm(vecMinus(that).toList())
+@JvmName("bigDecimalDistance")
+fun BDVec3.distance(that: BDVec3) = distance(that) { it.norm1() }
+@JvmName("bigDecimalDistance")
+fun <T> BDVec3.distance(that: BDVec3, norm: (Iterable<BigDecimal>) -> T): T = norm(vecMinus(that).toList())
 
 
 /**

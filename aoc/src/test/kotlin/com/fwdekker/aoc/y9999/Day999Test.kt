@@ -1,9 +1,11 @@
 package com.fwdekker.aoc.y9999
 
 import com.fwdekker.std.ChallengeTest
+import io.kotest.core.annotation.Ignored
 import io.kotest.core.annotation.Tags
 
 
+@Ignored
 @Tags("9999")
 object Day999Test : ChallengeTest(
     ::Day999,

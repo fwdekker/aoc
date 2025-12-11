@@ -47,7 +47,7 @@ if [ "$project" = "aoc" ]; then
         target="$root/y$year/Day${day}Test.kt"
 
         install_template "$template" "$target" || exit 1
-        sed -i -e "s/9999/$year/g" -e "s/999/$day/g" "$target" || exit 1
+        sed -i -e "s/9999/$year/g" -e "s/999/$day/g" -e "/Ignored/d" "$target" || exit 1
     }
 elif [ "$project" = "euler" ]; then
     problem="${2:?Second argument (problem) required}"
@@ -67,7 +67,7 @@ elif [ "$project" = "euler" ]; then
         target="$root/Problem${problem}Test.kt"
 
         install_template "$template" "$target" || exit 1
-        sed -i -e "s/9999/$problem/g" "$target" || exit 1
+        sed -i -e "s/9999/$problem/g" "$target" -e "/Ignored/d" || exit 1
     }
 else
     printf "Unknown project '%s'. Aborting.\n" "$project"

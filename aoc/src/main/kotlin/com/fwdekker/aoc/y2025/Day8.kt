@@ -9,6 +9,7 @@ import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.Vec3
 import com.fwdekker.std.maths.compareTo
 import com.fwdekker.std.maths.distance
+import com.fwdekker.std.maths.norm2
 import com.fwdekker.std.maths.productOf
 import com.fwdekker.std.read
 import com.fwdekker.std.toLongs
@@ -21,7 +22,7 @@ class Day8(sample: Int? = null, private val connections: Int = 1_000) : Day(year
     private val spanning =
         boxes
             .flatMapIndexed { idx, box -> boxes.drop(idx + 1).map { box to it } }
-            .sortedBy { it.first.distance(it.second) }
+            .sortedBy { box -> box.first.distance(box.second, norm = { it.norm2() }) }
             .let { pairs ->
                 val seen = mutableSetOf<Vec3<Long>>()
 

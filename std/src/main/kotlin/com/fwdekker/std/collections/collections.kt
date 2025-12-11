@@ -321,6 +321,18 @@ fun <A, B> Pair<A, B>.noneDistinct(): Boolean = first == second
 
 fun <A, B, C> Triple<A, B, C>.noneDistinct(): Boolean = first == second && first == third
 
+/**
+ * Returns `true` if and only if `this` contains exactly [target] elements that match the [predicate].
+ *
+ * If there are more than [target] elements that match the [predicate], then this method stops iterating over the
+ * sequence. In those cases, this method is faster than doing `count(predicate) == target`.
+ */
+fun <T> Sequence<T>.hasCountExactly(target: Int, predicate: (T) -> Boolean): Boolean =
+    target == fold(0) { counted, element ->
+        if (!predicate(element)) counted
+        else (counted + 1).also { if (it > target) return false }
+    }
+
 
 /**
  * Removes the element at [idx], and returns [this] list.

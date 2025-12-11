@@ -15,6 +15,7 @@ class Day22(sample: Int? = null) : Day(year = 2024, day = 22, sample = sample) {
 
     override fun part1() = seeds.sumOf { prng(it).drop(samples).first() }
 
+    // TODO: Improve memory efficiency
     override fun part2(): Long {
         val prices = seeds.map { seed -> prng(seed).take(samples).map { it % 10L }.toList() }
         val seqs = prices.map { it.zipWithNext { a, b -> b - a }.windowed(windowSize) }
