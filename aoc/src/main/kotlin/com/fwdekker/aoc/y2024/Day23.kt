@@ -5,6 +5,7 @@ import com.fwdekker.std.collections.asPair
 import com.fwdekker.std.collections.asTriple
 import com.fwdekker.std.collections.neverNull
 import com.fwdekker.std.collections.swap
+import com.fwdekker.std.memoised
 
 
 // See https://adventofcode.com/2024/day/23
@@ -33,23 +34,20 @@ class Day23(sample: Int? = null) : Day(year = 2024, day = 23, sample = sample) {
     override fun part2() = find(emptySet()).sorted().joinToString(",")
 
 
-    private val findCache = mutableMapOf<Set<String>, Set<String>>()
+    private val find = memoised { nodes: Set<String> ->
+        val mutuals = nodes.fold(edges.keys) { acc, node -> acc.intersect(edges[node] + node) }
 
-    private fun find(nodes: Set<String>): Set<String> =
-        findCache.getOrPut(nodes) {
-            val mutuals = nodes.fold(edges.keys) { acc, node -> acc.intersect(edges[node] + node) }
-            if (mutuals.isEmpty()) return nodes
-            if (mutuals.intersect(nodes).size < nodes.size) return emptySet()
-            if (mutuals.size == nodes.size) return nodes
-
-            mutuals
-                .map { mutual -> nodes + mutual }
-                .distinct()
-                .let { if (nodes in it) it.minusElement(nodes) else it }
-                .map { find(it) }
-                .maxByOrNull { it.size }
-                ?: nodes
-        }
+        if (mutuals.isEmpty()) nodes
+        else if (mutuals.intersect(nodes).size < nodes.size) emptySet()
+        else if (mutuals.size == nodes.size) nodes
+        else mutuals
+            .map { mutual -> nodes + mutual }
+            .distinct()
+            .let { if (nodes in it) it.minusElement(nodes) else it }
+            .map { callRecursive(it) }
+            .maxByOrNull { it.size }
+            ?: nodes
+    }
 }
 
 

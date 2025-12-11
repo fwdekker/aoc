@@ -2,10 +2,11 @@ package com.fwdekker.aoc.y2025
 
 import com.fwdekker.aoc.Day
 import com.fwdekker.std.allWords
+import com.fwdekker.std.collections.without
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.Graph
-import com.fwdekker.std.maths.sumOf
 import com.fwdekker.std.maths.toLong
+import com.fwdekker.std.memoised
 
 
 // See https://adventofcode.com/2025/day/11
@@ -31,17 +32,14 @@ class Day11(sample: Int? = null) : Day(year = 2025, day = 11, sample = sample) {
 
     // Assumes that there are no cycles!
     private fun Graph<String>.countPaths(start: String, targets: Set<String>, end: String): Long {
-        val memory = mutableMapOf<Pair<String, Set<String>>, Long>()
-
-        fun step(current: String, targets: Set<String>): Long =
-            memory.getOrPut(current to targets) {
-                getNeighbours(current).sumOf {
-                    if (it == end) (targets.isEmpty()).toLong()
-                    else step(it, if (it in targets) targets.minus(it) else targets)
-                }
+        val step = memoised { (current, targets): Pair<String, Set<String>> ->
+            getNeighbours(current).sumOf {
+                if (it == end) (targets.isEmpty()).toLong()
+                else callRecursive(it to targets.without(it))
             }
+        }
 
-        return step(start, targets)
+        return step(start to targets)
     }
 }
 

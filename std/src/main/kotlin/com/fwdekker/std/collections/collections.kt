@@ -340,6 +340,11 @@ fun <T> Sequence<T>.hasCountExactly(target: Int, predicate: (T) -> Boolean): Boo
 fun <T> List<T>.without(idx: Int): MutableList<T> = toMutableList().also { it.removeAt(idx) }
 
 /**
+ * Removes the given [element], or does nothing if the [element] is not in `this`.
+ */
+fun <T> Set<T>.without(element: T): Set<T> = if (element in this) minusElement(element) else this
+
+/**
  * Returns a copy of this list in which the [idx]th element is mapped according to [modify].
  */
 fun <T> List<T>.mapAt(idx: Int, modify: (T) -> T): List<T> = toMutableList().also { it[idx] = modify(it[idx]) }

@@ -5,6 +5,7 @@ import com.fwdekker.std.collections.NeverNullMap
 import com.fwdekker.std.collections.neverNull
 import com.fwdekker.std.foldSelfIndexed
 import com.fwdekker.std.maths.cartesian
+import com.fwdekker.std.memoised
 
 
 // See https://adventofcode.com/2024/day/21
@@ -193,8 +194,6 @@ class Day21(sample: Int? = null) : Day(year = 2024, day = 21, sample = sample) {
         ),
     ).mapValues { (_, values) -> values.mapValues { (_, value) -> value.map { it + 'A' } }.neverNull() }.neverNull()
 
-    private val codeToKeysCache = mutableMapOf<String, List<String>>()
-
 
     // TODO: Improve memory efficiency
     override fun part1() = calculateComplexity(2)
@@ -203,8 +202,8 @@ class Day21(sample: Int? = null) : Day(year = 2024, day = 21, sample = sample) {
     override fun part2() = calculateComplexity(25)
 
 
-    private fun codeToKeys(pad: NeverNullMap<Char, NeverNullMap<Char, List<String>>>, code: String): List<String> =
-        codeToKeysCache.getOrPut(code) {
+    private val codeToKeys =
+        memoised { (pad, code): Pair<NeverNullMap<Char, NeverNullMap<Char, List<String>>>, String> ->
             "A$code"
                 .zipWithNext { from, to -> pad[from][to] }
                 .reduce { acc, paths -> acc.cartesian(paths).map { it.first + it.second }.toList() }
@@ -215,7 +214,7 @@ class Day21(sample: Int? = null) : Day(year = 2024, day = 21, sample = sample) {
             .sumOf { code ->
                 listOf(code)
                     .foldSelfIndexed(robotsInBetween + 1) { idx, acc ->
-                        acc.flatMap { codeToKeys(if (idx == 0) numpad else keypad, it) }.allMinOf { it.length }
+                        acc.flatMap { codeToKeys((if (idx == 0) numpad else keypad) to it) }.allMinOf { it.length }
                     }
                     .minOf { it.length }
                     .let { code.dropLast(1).toLong() * it }
