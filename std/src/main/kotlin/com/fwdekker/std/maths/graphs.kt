@@ -1,8 +1,8 @@
 @file:Suppress("unused")
 package com.fwdekker.std.maths
 
-import com.fwdekker.std.collections.mapSecond
 import com.fwdekker.std.collections.foldSum
+import com.fwdekker.std.collections.mapSecond
 import java.util.ArrayDeque
 import java.util.Deque
 import java.util.PriorityQueue
@@ -166,5 +166,40 @@ abstract class Graph<N : Any> {
             node == null -> listOf(end) + append
             else -> spanningPath(edges, start, node, listOf(end) + append)
         }
+    }
+
+
+    /**
+     * Returns all paths starting from [start].
+     */
+    fun allPaths(start: N): Sequence<List<N>> {
+        fun step(path: List<N>): Sequence<List<N>> =
+            getNeighbours(path.last())
+                .asSequence()
+                .filter { it !in path }
+                .flatMap { neighbor ->
+                    val next = path + neighbor
+                    sequenceOf(next) + step(next)
+                }
+
+        return step(listOf(start))
+    }
+
+    /**
+     * Returns all unique paths with the given [start] and [end] points.
+     */
+    fun allPaths(start: N, end: N): Sequence<List<N>> {
+        fun step(path: List<N>): Sequence<List<N>> =
+            getNeighbours(path.last())
+                .asSequence()
+                .filter { it !in path }
+                .flatMap { neighbor ->
+                    val next = path + neighbor
+
+                    if (neighbor == end) sequenceOf(next)
+                    else step(next)
+                }
+
+        return step(listOf(start))
     }
 }

@@ -8,7 +8,7 @@ import com.fwdekker.std.toDigits
 
 // See https://adventofcode.com/2025/day/3
 class Day3(sample: Int? = null) : Day(year = 2025, day = 3, sample = sample) {
-    private val banks = read(resource).lines().map { it.toDigits() }
+    private val banks = input.lines().map { it.toDigits() }
 
 
     override fun part1(): Int = banks.sumOf { bank ->

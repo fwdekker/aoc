@@ -8,7 +8,7 @@ import com.fwdekker.std.toLongs
 
 // See https://adventofcode.com/2025/day/5
 class Day5(sample: Int? = null) : Day(year = 2025, day = 5, sample = sample) {
-    private val sections = read(resource).sections()
+    private val sections = input.sections()
     private val ranges = sections[0].toLongs('-').map { it[0]..it[1] }
     private val ingredients = sections[1].map { it.toLong() }
 

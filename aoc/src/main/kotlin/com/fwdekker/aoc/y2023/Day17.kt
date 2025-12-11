@@ -17,7 +17,7 @@ import java.util.PriorityQueue
 
 // See https://adventofcode.com/2023/day/17
 class Day17(sample: Int? = null) : Day(year = 2023, day = 17, sample = sample) {
-    private val chart = read(resource).toChart()
+    private val chart = input.toChart()
 
 
     override fun part1(): Int = chart.smallestLoss({ it.neighbors() }, { true })

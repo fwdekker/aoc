@@ -20,7 +20,7 @@ import kotlin.math.abs
 
 // See https://adventofcode.com/2025/day/9
 class Day9(sample: Int? = null) : Day(year = 2025, day = 9, sample = sample) {
-    private val tiles = read(resource).linesNotBlank().map { it.toInts(',').asPair().swap() }
+    private val tiles = input.linesNotBlank().map { it.toInts(',').asPair().swap() }
 
 
     override fun part1(): Long = tiles.allPairs().maxOf { area(it) }

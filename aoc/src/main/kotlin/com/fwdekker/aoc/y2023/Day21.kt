@@ -15,7 +15,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2023/day/21
 class Day21(sample: Int? = null) : Day(year = 2023, day = 21, sample = sample) {
-    private val chart = read(resource).toChart()
+    private val chart = input.toChart()
     private val start = setOf(chart.coordsOf('S'))
 
 

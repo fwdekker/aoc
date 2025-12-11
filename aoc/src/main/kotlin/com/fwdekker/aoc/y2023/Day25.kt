@@ -15,7 +15,7 @@ class Day25(sample: Int? = null) : Day(year = 2023, day = 25, sample = sample) {
 
 
     init {
-        read(resource).linesNotBlank()
+        input.linesNotBlank()
             .map { it.split(": ") }
             .forEach { (source, destinations) ->
                 graph.addVertex(source)

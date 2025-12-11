@@ -10,7 +10,7 @@ import kotlin.math.pow
 
 // See https://adventofcode.com/2023/day/4
 class Day4(sample: Int? = null) : Day(year = 2023, day = 4, sample = sample) {
-    private val lines = read(resource).linesNotBlank()
+    private val lines = input.linesNotBlank()
     private val winsByLine =
         lines
             .map { line -> line.substringAfter(": ").trim().split('|').map { it.toInts(Regex("\\s+")).toSet() } }

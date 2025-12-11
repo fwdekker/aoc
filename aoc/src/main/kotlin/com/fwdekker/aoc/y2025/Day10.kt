@@ -13,7 +13,7 @@ import com.microsoft.z3.Status
 
 // See https://adventofcode.com/2025/day/10
 class Day10(sample: Int? = null) : Day(year = 2025, day = 10, sample = sample) {
-    private val machines = read(resource).linesNotBlank()
+    private val machines = input.linesNotBlank()
         .map { abc ->
             abc.splitAtIndex(abc.indexOf(']') + 1).let { (a, bc) ->
                 bc.splitAtIndex(bc.indexOf('{') - 1).let { (b, c) ->

@@ -17,7 +17,7 @@ import kotlin.math.roundToLong
 @OptIn(ExperimentalStdlibApi::class)
 // See https://adventofcode.com/2023/day/18
 class Day18(sample: Int? = null) : Day(year = 2023, day = 18, sample = sample) {
-    private val lines = read(resource).linesNotBlank()
+    private val lines = input.linesNotBlank()
 
 
     override fun part1(): Long =

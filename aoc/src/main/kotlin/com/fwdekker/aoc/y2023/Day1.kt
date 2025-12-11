@@ -7,7 +7,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2023/day/1
 class Day1(sample: Int? = null) : Day(year = 2023, day = 1, sample = sample) {
-    private val lines = read(resource).linesNotBlank()
+    private val lines = input.linesNotBlank()
 
 
     override fun part1(): Int =

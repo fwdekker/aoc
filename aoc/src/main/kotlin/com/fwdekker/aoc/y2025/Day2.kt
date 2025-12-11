@@ -13,7 +13,7 @@ import com.fwdekker.std.toLongs
 
 // See https://adventofcode.com/2025/day/2
 class Day2(sample: Int? = null) : Day(year = 2025, day = 2, sample = sample) {
-    private val ranges = read(resource).split(',').map { it.toLongs('-').asPair().asRangeTo() }
+    private val ranges = input.split(',').map { it.toLongs('-').asPair().asRangeTo() }
 
 
     override fun part1(): Long =

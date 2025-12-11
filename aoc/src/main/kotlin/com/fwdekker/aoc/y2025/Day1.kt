@@ -11,7 +11,7 @@ import com.fwdekker.std.splitAtIndex
 
 // See https://adventofcode.com/2025/day/1
 class Day1(sample: Int? = null) : Day(year = 2025, day = 1, sample = sample) {
-    private val pairs = read(resource).linesNotBlank().map { it.splitAtIndex(1) }.mapSeconds { it.toInt() }
+    private val pairs = input.linesNotBlank().map { it.splitAtIndex(1) }.mapSeconds { it.toInt() }
 
 
     override fun part1(): Int =

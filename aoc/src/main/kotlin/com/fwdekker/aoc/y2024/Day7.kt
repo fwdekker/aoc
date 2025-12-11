@@ -13,7 +13,7 @@ import java.math.BigInteger
 // See https://adventofcode.com/2024/day/7
 class Day7(sample: Int? = null) : Day(year = 2024, day = 7, sample = sample) {
     private val equations =
-        read(resource).linesNotBlank().map { it.split(':') }.map { it[0].toBigInteger() to it[1].toBigIntegers(' ') }
+        input.linesNotBlank().map { it.split(':') }.map { it[0].toBigInteger() to it[1].toBigIntegers(' ') }
 
 
     override fun part1() = calibrate(operatorCount = 2)

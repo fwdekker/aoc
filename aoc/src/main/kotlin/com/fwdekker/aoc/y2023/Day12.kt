@@ -12,7 +12,7 @@ import com.fwdekker.std.toInts
 
 // See https://adventofcode.com/2023/day/12
 class Day12(sample: Int? = null) : Day(year = 2023, day = 12, sample = sample) {
-    private val lines = read(resource).linesNotBlank()
+    private val lines = input.linesNotBlank()
     private val rows = lines.map { it.split(' ').asPair() }.mapSeconds { it.toInts(',') }
 
 

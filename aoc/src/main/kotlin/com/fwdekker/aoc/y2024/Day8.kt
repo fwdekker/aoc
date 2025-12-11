@@ -17,7 +17,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2024/day/8
 class Day8(sample: Int? = null) : Day(year = 2024, day = 8, sample = sample) {
-    private val chart = read(resource).toChart()
+    private val chart = input.toChart()
 
 
     override fun part1() =

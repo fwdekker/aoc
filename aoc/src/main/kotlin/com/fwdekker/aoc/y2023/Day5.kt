@@ -12,7 +12,7 @@ import com.fwdekker.std.toLongs
 
 // See https://adventofcode.com/2023/day/5
 class Day5(sample: Int? = null) : Day(year = 2023, day = 5, sample = sample) {
-    private val sections = read(resource).sections()
+    private val sections = input.sections()
 
     private val seeds: Collection<Long> = sections[0][0].substringAfter(": ").toLongs(' ')
     private val seedRanges: Collection<LongRange> = seeds.chunked(2).map { it[0]..<it[0] + it[1] }

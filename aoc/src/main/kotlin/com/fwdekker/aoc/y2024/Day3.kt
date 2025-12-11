@@ -7,7 +7,7 @@ import com.fwdekker.std.toInts
 
 // See https://adventofcode.com/2024/day/3
 class Day3(sample: Int? = null) : Day(year = 2024, day = 3, sample = sample) {
-    private val instructions = read(resource)
+    private val instructions = input
 
 
     override fun part1(): Int =

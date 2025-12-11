@@ -19,7 +19,7 @@ import kotlin.math.max
 
 // See https://adventofcode.com/2023/day/3
 class Day3(sample: Int? = null) : Day(year = 2023, day = 3, sample = sample) {
-    private val chart = read(resource).toChart()
+    private val chart = input.toChart()
 
 
     override fun part1(): Int =

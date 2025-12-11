@@ -9,7 +9,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2023/day/8
 class Day8(sample: Int? = null) : Day(year = 2023, day = 8, sample = sample) {
-    private val lines = read(resource).linesNotBlank()
+    private val lines = input.linesNotBlank()
 
     private val steps = lines[0].toList()
     private val map = lines.drop(1)

@@ -13,7 +13,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2025/day/6
 class Day6(sample: Int? = null) : Day(year = 2025, day = 6, sample = sample) {
-    private val text = read(resource).linesNotBlank()
+    private val text = input.linesNotBlank()
 
 
     override fun part1(): Long {

@@ -13,7 +13,7 @@ import com.fwdekker.std.toDigits
 
 // See https://adventofcode.com/2024/day/10
 class Day10(sample: Int? = null) : Day(year = 2024, day = 10, sample = sample) {
-    private val chart = read(resource).linesNotBlank().map { it.toDigits() }
+    private val chart = input.linesNotBlank().map { it.toDigits() }
 
 
     override fun part1() = trails().values.sumOf { it.toSet().size }

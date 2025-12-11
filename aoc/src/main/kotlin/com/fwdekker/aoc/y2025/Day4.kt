@@ -14,7 +14,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2025/day/4
 class Day4(sample: Int? = null) : Day(year = 2025, day = 4, sample = sample) {
-    private val diagram = read(resource).toChart()
+    private val diagram = input.toChart()
 
 
     override fun part1(): Int = diagram.removable().count()

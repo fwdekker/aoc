@@ -9,7 +9,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2023/day/13
 class Day13(sample: Int? = null) : Day(year = 2023, day = 13, sample = sample) {
-    private val patterns = read(resource).toCharts()
+    private val patterns = input.toCharts()
 
 
     override fun part1(): Int = patterns.sumOf { it.value(targetDiff = 0) }

@@ -18,7 +18,7 @@ import com.fwdekker.std.toLongs
 // See https://adventofcode.com/2025/day/8
 class Day8(sample: Int? = null, private val connections: Int = 1_000) : Day(year = 2025, day = 8, sample = sample) {
     private val boxes =
-        read(resource).linesNotBlank().map { it.toLongs(',').asTriple() }
+        input.linesNotBlank().map { it.toLongs(',').asTriple() }
     private val spanning =
         boxes
             .flatMapIndexed { idx, box -> boxes.drop(idx + 1).map { box to it } }

@@ -12,7 +12,7 @@ import com.fwdekker.std.toInts
 
 // See https://adventofcode.com/2024/day/9
 class Day9(sample: Int? = null) : Day(year = 2024, day = 9, sample = sample) {
-    private val diskMap = read(resource).toInts("")
+    private val diskMap = input.toInts("")
 
 
     override fun part1(): Long {

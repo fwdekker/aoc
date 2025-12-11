@@ -19,7 +19,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2024/day/4
 class Day4(sample: Int? = null) : Day(year = 2024, day = 4, sample = sample) {
-    private val puzzle = read(resource).toChart()
+    private val puzzle = input.toChart()
 
 
     override fun part1(): Int =

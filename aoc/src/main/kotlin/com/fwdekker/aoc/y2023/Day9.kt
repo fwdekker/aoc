@@ -8,7 +8,7 @@ import com.fwdekker.std.toInts
 
 // See https://adventofcode.com/2023/day/9
 class Day9(sample: Int? = null) : Day(year = 2023, day = 9, sample = sample) {
-    private val lines = read(resource).linesNotBlank()
+    private val lines = input.linesNotBlank()
 
 
     override fun part1(): Int = lines.sumOf { it.toInts(' ').next() }

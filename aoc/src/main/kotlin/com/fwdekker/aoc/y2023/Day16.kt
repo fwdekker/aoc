@@ -19,7 +19,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2023/day/16
 class Day16(sample: Int? = null) : Day(year = 2023, day = 16, sample = sample) {
-    private val chart = read(resource).toChart()
+    private val chart = input.toChart()
 
 
     override fun part1(): Int = traverse(chart, Heading(0, 0, East))

@@ -17,7 +17,7 @@ import kotlin.math.min
 
 // See https://adventofcode.com/2023/day/11
 class Day11(sample: Int? = null) : Day(year = 2023, day = 11, sample = sample) {
-    private val chart = read(resource).toChart()
+    private val chart = input.toChart()
 
     private val expandX = chart.rows.filter { x -> chart[x].all { it == '.' } }.toLongs()
     private val expandY = chart.cols.filter { y -> chart.all { it[y] == '.' } }.toLongs()

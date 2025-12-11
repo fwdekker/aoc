@@ -6,7 +6,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/9999/day/999
 class Day999(sample: Int? = null) : Day(year = 9999, day = 999, sample = sample) {
-    private val text = read(resource)
+    private val text = input
 
 
     override fun part1(): Int = 0

@@ -12,7 +12,7 @@ import com.fwdekker.std.toLongs
 
 // See https://adventofcode.com/2023/day/6
 class Day6(sample: Int? = null) : Day(year = 2023, day = 6, sample = sample) {
-    private val lines = read(resource).linesNotBlank().asPair().map { it.substringAfter(": ") }
+    private val lines = input.linesNotBlank().asPair().map { it.substringAfter(": ") }
 
 
     override fun part1(): Long =

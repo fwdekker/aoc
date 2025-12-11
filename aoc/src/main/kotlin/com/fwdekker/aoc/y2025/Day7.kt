@@ -9,7 +9,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2025/day/7
 class Day7(sample: Int? = null) : Day(year = 2025, day = 7, sample = sample) {
-    private val diagram = read(resource).toChart().filter { row -> row.any { it != '.' } }
+    private val diagram = input.toChart().filter { row -> row.any { it != '.' } }
 
 
     override fun part1(): Int =

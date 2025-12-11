@@ -21,7 +21,7 @@ import com.fwdekker.std.read
 
 // See https://adventofcode.com/2023/day/10
 class Day10(sample: Int? = null) : Day(year = 2023, day = 10, sample = sample) {
-    private val maze = read(resource).toChart()
+    private val maze = input.toChart()
 
     private val start = maze.coordsOf('S')
     private val cycle = Cardinal.entries.asSequence()

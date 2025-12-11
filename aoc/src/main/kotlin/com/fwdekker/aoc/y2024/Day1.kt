@@ -13,7 +13,7 @@ import kotlin.math.absoluteValue
 
 // See https://adventofcode.com/2024/day/1
 class Day1(sample: Int? = null) : Day(year = 2024, day = 1, sample = sample) {
-    private val pairs = read(resource).linesNotBlank().toInts(' ').map { it.asPair() }
+    private val pairs = input.linesNotBlank().toInts(' ').map { it.asPair() }
     private val lefts = pairs.firsts()
     private val rights = pairs.seconds()
 
