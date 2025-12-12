@@ -1,34 +1,30 @@
 package com.fwdekker.aoc.y2024
 
 import com.fwdekker.aoc.Day
-import com.fwdekker.std.collections.associateWithIndex
+import com.fwdekker.std.collections.foldSum
 import com.fwdekker.std.toLongs
 
 
 // See https://adventofcode.com/2024/day/22
 class Day22(sample: Int? = null) : Day(year = 2024, day = 22, sample = sample) {
     private val seeds = input.toLongs('\n')
-    private val monkeys = seeds.indices
-    private val samples = 2000
+    private val samples = 2_000
     private val windowSize = 4
 
 
     override fun part1() = seeds.sumOf { prng(it).drop(samples).first() }
 
-    // TODO: Improve memory efficiency
-    override fun part2(): Long {
-        val prices = seeds.map { seed -> prng(seed).take(samples).map { it % 10L }.toList() }
-        val seqs = prices.map { it.zipWithNext { a, b -> b - a }.windowed(windowSize) }
-        val seqToIdx = seqs.map { sequence -> sequence.asReversed().associateWithIndex() }
-
-        return seqs
-            .flatten().distinct()
-            .maxOf { seq ->
-                monkeys.sumOf { monkey ->
-                    seqToIdx[monkey][seq]?.let { prices[monkey][samples - 1 - it] } ?: 0L
-                }
+    override fun part2(): Long =
+        seeds.asSequence()
+            .map { seed ->
+                prng(seed).take(samples).map { it % 10L }
+                    .windowed(windowSize + 1)
+                    .map { it.zipWithNext { a, b -> b - a }.joinToString(",") to it.last() }
+                    .distinctBy { (sequence, _) -> sequence }
+                    .associate { (sequence, price) -> sequence to price }
             }
-    }
+            .foldSum { a, b -> (a ?: 0L) + b }
+            .maxOf { it.value }
 
 
     private fun prng(seed: Long): Sequence<Long> =
