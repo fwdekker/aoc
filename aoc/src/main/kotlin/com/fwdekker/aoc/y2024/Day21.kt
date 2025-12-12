@@ -1,10 +1,7 @@
 package com.fwdekker.aoc.y2024
 
 import com.fwdekker.aoc.Day
-import com.fwdekker.std.collections.NeverNullMap
 import com.fwdekker.std.collections.neverNull
-import com.fwdekker.std.foldSelfIndexed
-import com.fwdekker.std.maths.cartesian
 import com.fwdekker.std.memoised
 
 
@@ -155,7 +152,7 @@ class Day21(sample: Int? = null) : Day(year = 2024, day = 21, sample = sample) {
             '8' to listOf("<"),
             '9' to listOf(""),
         ),
-    ).mapValues { (_, values) -> values.mapValues { (_, value) -> value.map { it + 'A' } }.neverNull() }.neverNull()
+    ).mapValues { (_, targets) -> targets.mapValues { (_, path) -> path.map { it + 'A' } }.neverNull() }.neverNull()
     private val keypad = mapOf(
         'A' to mapOf(
             'A' to listOf(""),
@@ -192,36 +189,25 @@ class Day21(sample: Int? = null) : Day(year = 2024, day = 21, sample = sample) {
             'v' to listOf("<"),
             '>' to listOf(""),
         ),
-    ).mapValues { (_, values) -> values.mapValues { (_, value) -> value.map { it + 'A' } }.neverNull() }.neverNull()
+    ).mapValues { (_, targets) -> targets.mapValues { (_, path) -> path.map { it + 'A' } }.neverNull() }.neverNull()
 
 
-    // TODO: Improve memory efficiency
     override fun part1() = calculateComplexity(2)
 
-    // TODO: Implement this; current implementation does not finish
     override fun part2() = calculateComplexity(25)
 
 
-    private val codeToKeys =
-        memoised { (pad, code): Pair<NeverNullMap<Char, NeverNullMap<Char, List<String>>>, String> ->
-            "A$code"
-                .zipWithNext { from, to -> pad[from][to] }
-                .reduce { acc, paths -> acc.cartesian(paths).map { it.first + it.second }.toList() }
-        }
+    private val getPathLength = memoised { (path, robotsCurrent, robotsMax): Triple<String, Int, Int> ->
+        val pad = if (robotsCurrent == robotsMax) numpad else keypad
 
-    private fun calculateComplexity(robotsInBetween: Int) =
-        codes
-            .sumOf { code ->
-                listOf(code)
-                    .foldSelfIndexed(robotsInBetween + 1) { idx, acc ->
-                        acc.flatMap { codeToKeys((if (idx == 0) numpad else keypad) to it) }.allMinOf { it.length }
-                    }
-                    .minOf { it.length }
-                    .let { code.dropLast(1).toLong() * it }
-            }
+        if (robotsCurrent < 0) path.length.toLong()
+        else "A$path"
+            .zipWithNext()
+            .sumOf { (from, to) -> pad[from][to].minOf { callRecursive(Triple(it, robotsCurrent - 1, robotsMax)) } }
+    }
 
-    private fun <T, R : Comparable<R>> List<T>.allMinOf(selector: (T) -> R): List<T> =
-        minOf(selector).let { min -> filter { selector(it) == min } }
+    private fun calculateComplexity(robotsInBetween: Int): Long =
+        codes.sumOf { getPathLength(Triple(it, robotsInBetween, robotsInBetween)) * it.dropLast(1).toLong() }
 }
 
 
