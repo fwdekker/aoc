@@ -25,20 +25,19 @@ class Day23(sample: Int? = null) : Day(year = 2023, day = 23, sample = sample) {
     private val start = Coords(0, chart.firstRow.indexOf('.'))
     private val end = Coords(chart.lastRowIndex, chart.lastRow.indexOf('.'))
     private val junctions =
-        chart.allCoordsOf { it != '#' }
-            .filter { chart.dryNeighborsOf(it).size > 2 }
-            .let { it + listOf(start, end) }
+        listOf(start, end) + chart.allCoordsOf { it != '#' }.filter { chart.dryNeighborsOf(it).size > 2 }
 
 
     override fun part1(): Int = chart.longestDistance(start, end) { chart.slipperyNeighborsOf(it) }
 
-    // TODO: Make this one WAY more time efficient, currently takes more than one minute!
+    // TODO: Make this one more time-efficient, currently takes more than ten seconds!
+    // TODO: Using a cache?
     override fun part2(): Int = chart.longestDistance(start, end) { chart.dryNeighborsOf(it) }
 
 
     private fun Chart.slipperyNeighborsOf(coords: Coords): List<Coords> =
         when (this[coords]) {
-            '#' -> emptyList()
+            '#' -> error("Traversed node cannot be a wall.")
             '^' -> listOf(coords.north())
             '>' -> listOf(coords.east())
             'v' -> listOf(coords.south())
@@ -47,10 +46,7 @@ class Day23(sample: Int? = null) : Day(year = 2023, day = 23, sample = sample) {
         }.filter { it in this && this[it] != '#' }
 
     private fun Chart.dryNeighborsOf(coords: Coords): List<Coords> =
-        when (this[coords]) {
-            '#' -> emptyList()
-            else -> coords.cardinals
-        }.filter { it in this && this[it] != '#' }
+        coords.cardinals.filter { it in this && this[it] != '#' }
 
     private fun Chart.longestDistance(from: Coords, to: Coords, getNeighbors: (Coords) -> Iterable<Coords>): Int =
         longestDistance(from, to, junctions.associateWith { findShortestDistances(it, junctions, getNeighbors) })
@@ -68,7 +64,7 @@ class Day23(sample: Int? = null) : Day(year = 2023, day = 23, sample = sample) {
 
     private fun findShortestDistances(
         from: Coords,
-        to: Sequence<Coords>,
+        to: List<Coords>,
         getNeighbors: (Coords) -> Iterable<Coords>,
     ): Map<Coords, Int> {
         val distances = mutableMapOf<Coords, Int>().withDefault { Integer.MAX_VALUE }
