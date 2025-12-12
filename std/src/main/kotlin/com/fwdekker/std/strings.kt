@@ -138,3 +138,8 @@ fun String.repeat(amount: Int, separator: String = ""): String =
  * Splits this string into two parts at [index].
  */
 fun String.splitAtIndex(index: Int): Pair<String, String> = take(index) to drop(index)
+
+/**
+ * Invokes [splitAtIndex] at the first occurrence of the [delimiter].
+ */
+fun String.splitAt(delimiter: Char): Pair<String, String> = splitAtIndex(indexOf(delimiter))

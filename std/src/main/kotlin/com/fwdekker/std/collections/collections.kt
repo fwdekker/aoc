@@ -40,6 +40,36 @@ fun <K, V> Iterable<Map<K, V>>.foldSum(combine: (V?, V) -> V): Map<K, V> =
 fun <A, B> Pair<A, B>.swap(): Pair<B, A> = Pair(second, first)
 
 /**
+ * Takes the sum of all elements of the tuple.
+ */
+@JvmName("intSum")
+fun Pair<Int, Int>.sum(): Int = first + second
+
+@JvmName("intSum")
+fun Triple<Int, Int, Int>.sum(): Int = first + second + third
+
+@JvmName("longSum")
+fun Pair<Long, Long>.sum(): Long = first + second
+
+@JvmName("longSum")
+fun Triple<Long, Long, Long>.sum(): Long = first + second + third
+
+/**
+ * Takes the product of all elements of the tuple.
+ */
+@JvmName("intProduct")
+fun Pair<Int, Int>.product(): Int = first * second
+
+@JvmName("intProduct")
+fun Triple<Int, Int, Int>.product(): Int = first * second * third
+
+@JvmName("longProduct")
+fun Pair<Long, Long>.product(): Long = first * second
+
+@JvmName("longProduct")
+fun Triple<Long, Long, Long>.product(): Long = first * second * third
+
+/**
  * Swaps the entries if the [Pair.first] is smaller than the [Pair.second].
  */
 fun <A : Comparable<A>> Pair<A, A>.sorted(): Pair<A, A> =

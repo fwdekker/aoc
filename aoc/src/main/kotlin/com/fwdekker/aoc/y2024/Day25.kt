@@ -24,7 +24,7 @@ class Day25(sample: Int? = null) : Day(year = 2024, day = 25, sample = sample) {
     override fun part1() =
         locks.sumOf { lock -> keys.count { key -> lock.zip(key) { a, b -> a + b }.all { it <= height } } }
 
-    override fun part2() = TODO()
+    override fun part2() = 0
 
 
     private fun Chart.toHeights(): List<Int> = cols.map { col -> col(col).count { it == '#' } }
