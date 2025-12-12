@@ -28,6 +28,17 @@ if [ "$project" = "aoc" ]; then
 
     {
         root="$(pwd)/aoc/src/main/kotlin/com/fwdekker/aoc/"
+        template="$root/y9999/AllDays.kt"
+        target="$root/y$year/AllDays.kt"
+
+        if [ -f "$target" ]; then
+            install_template "$template" "$target" || exit 1
+            sed -i -e "s/9999/$year/g" "$target" || exit 1
+        fi
+    }
+
+    {
+        root="$(pwd)/aoc/src/main/kotlin/com/fwdekker/aoc/"
         template="$root/y9999/Day999.kt"
         target="$root/y$year/Day$day.kt"
 
