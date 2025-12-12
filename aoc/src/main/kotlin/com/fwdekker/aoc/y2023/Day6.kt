@@ -6,7 +6,6 @@ import com.fwdekker.std.collections.map
 import com.fwdekker.std.collections.zipped
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.productOf
-import com.fwdekker.std.read
 import com.fwdekker.std.toLongs
 
 

@@ -7,7 +7,6 @@ import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.lcm
 import com.fwdekker.std.maths.sum
 import com.fwdekker.std.maths.toLongs
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2023/day/20

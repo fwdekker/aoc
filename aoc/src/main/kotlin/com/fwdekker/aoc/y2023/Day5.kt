@@ -5,7 +5,6 @@ import com.fwdekker.std.collections.foldSum
 import com.fwdekker.std.maths.overlap
 import com.fwdekker.std.maths.shift
 import com.fwdekker.std.maths.without
-import com.fwdekker.std.read
 import com.fwdekker.std.sections
 import com.fwdekker.std.toLongs
 

@@ -12,7 +12,6 @@ import com.fwdekker.std.maths.minus
 import com.fwdekker.std.maths.naturalNumbersInt
 import com.fwdekker.std.maths.plus
 import com.fwdekker.std.maths.simplifyRatio
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2024/day/8

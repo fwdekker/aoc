@@ -5,7 +5,6 @@ import com.fwdekker.std.collections.firsts
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.orderedPartitions
 import com.fwdekker.std.maths.sum
-import com.fwdekker.std.read
 import com.fwdekker.std.toBigIntegers
 import java.math.BigInteger
 

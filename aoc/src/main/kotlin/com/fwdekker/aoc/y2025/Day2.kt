@@ -7,7 +7,6 @@ import com.fwdekker.std.maths.asRangeTo
 import com.fwdekker.std.maths.length
 import com.fwdekker.std.maths.splitAtIndex
 import com.fwdekker.std.maths.sumIf
-import com.fwdekker.std.read
 import com.fwdekker.std.toLongs
 
 

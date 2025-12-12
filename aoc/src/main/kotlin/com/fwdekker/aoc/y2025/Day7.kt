@@ -4,7 +4,6 @@ import com.fwdekker.aoc.Day
 import com.fwdekker.std.collections.foldSum
 import com.fwdekker.std.grid.firstRow
 import com.fwdekker.std.grid.toChart
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2025/day/7

@@ -1,7 +1,7 @@
 package com.fwdekker.aoc.y2024
 
-import com.fwdekker.aoc.WalledChartGraph
 import com.fwdekker.aoc.Day
+import com.fwdekker.aoc.WalledChartGraph
 import com.fwdekker.std.collections.associateWithIndex
 import com.fwdekker.std.collections.neverNull
 import com.fwdekker.std.grid.coordsOf

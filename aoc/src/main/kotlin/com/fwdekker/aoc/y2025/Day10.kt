@@ -4,7 +4,6 @@ import com.fwdekker.aoc.Day
 import com.fwdekker.std.allInts
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.powerSet
-import com.fwdekker.std.read
 import com.fwdekker.std.splitAtIndex
 import com.microsoft.z3.Context
 import com.microsoft.z3.IntNum

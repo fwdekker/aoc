@@ -6,7 +6,6 @@ import com.fwdekker.std.collections.mapFirst
 import com.fwdekker.std.collections.mapSecond
 import com.fwdekker.std.collections.repeat
 import com.fwdekker.std.collections.unzip
-import com.fwdekker.std.read
 import com.fwdekker.std.toInts
 
 

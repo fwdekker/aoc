@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 val libs = extensions.getByType(VersionCatalogsExtension::class.java).named("libs")
 
 
@@ -27,6 +29,9 @@ tasks.test {
 
     useJUnitPlatform {
         includeEngines("kotest")
+    }
+    testLogging {
+        exceptionFormat = TestExceptionFormat.FULL
     }
 }
 

@@ -31,7 +31,7 @@ object SequencesTest : DescribeSpec({
             Variant("Long", { it <= Long.MAX_VALUE.toBigInteger() }, { it.toLong() }),
             Variant("BigInt", { true }, { it }),
         ) { variant ->
-            val expected = read("/maths/${method.name}.txt")
+            val expected = read("maths/${method.name}.txt")
                 .toBigIntegers('\n')
                 .filter(variant.filter)
                 .map(variant.parse)

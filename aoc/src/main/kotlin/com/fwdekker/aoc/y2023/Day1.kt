@@ -2,7 +2,6 @@ package com.fwdekker.aoc.y2023
 
 import com.fwdekker.aoc.Day
 import com.fwdekker.std.linesNotBlank
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2023/day/1

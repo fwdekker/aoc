@@ -2,7 +2,6 @@ package com.fwdekker.aoc.y2024
 
 import com.fwdekker.aoc.Day
 import com.fwdekker.std.collections.asPair
-import com.fwdekker.std.read
 import com.fwdekker.std.sections
 import com.fwdekker.std.toInts
 

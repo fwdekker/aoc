@@ -16,7 +16,6 @@ import com.fwdekker.std.grid.coordsOf
 import com.fwdekker.std.grid.get
 import com.fwdekker.std.grid.move
 import com.fwdekker.std.grid.toChart
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2023/day/10

@@ -11,7 +11,6 @@ import com.fwdekker.std.maths.compareTo
 import com.fwdekker.std.maths.distance
 import com.fwdekker.std.maths.norm2
 import com.fwdekker.std.maths.productOf
-import com.fwdekker.std.read
 import com.fwdekker.std.toLongs
 
 

@@ -9,7 +9,6 @@ import com.fwdekker.std.grid.move
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.distance
 import com.fwdekker.std.maths.toLongs
-import com.fwdekker.std.read
 import kotlin.math.abs
 import kotlin.math.roundToLong
 

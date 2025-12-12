@@ -5,7 +5,6 @@ import com.fwdekker.std.collections.mapSeconds
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.toInt
 import com.fwdekker.std.maths.wrapMod
-import com.fwdekker.std.read
 import com.fwdekker.std.splitAtIndex
 
 

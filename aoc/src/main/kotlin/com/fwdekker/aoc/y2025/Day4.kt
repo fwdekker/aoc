@@ -9,7 +9,6 @@ import com.fwdekker.std.grid.mutable
 import com.fwdekker.std.grid.principals
 import com.fwdekker.std.grid.set
 import com.fwdekker.std.grid.toChart
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2025/day/4

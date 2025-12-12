@@ -32,6 +32,7 @@ class Day23(sample: Int? = null) : Day(year = 2023, day = 23, sample = sample) {
 
     override fun part1(): Int = chart.longestDistance(start, end) { chart.slipperyNeighborsOf(it) }
 
+    // TODO: Make this one WAY more time efficient, currently takes more than one minute!
     override fun part2(): Int = chart.longestDistance(start, end) { chart.dryNeighborsOf(it) }
 
 

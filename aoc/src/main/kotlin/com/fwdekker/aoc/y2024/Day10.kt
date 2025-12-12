@@ -7,7 +7,6 @@ import com.fwdekker.std.grid.allCoordsOf
 import com.fwdekker.std.grid.cardinals
 import com.fwdekker.std.grid.getOrNull
 import com.fwdekker.std.linesNotBlank
-import com.fwdekker.std.read
 import com.fwdekker.std.toDigits
 
 

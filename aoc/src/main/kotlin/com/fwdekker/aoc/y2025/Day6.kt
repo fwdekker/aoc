@@ -8,7 +8,6 @@ import com.fwdekker.std.grid.transpose
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.product
 import com.fwdekker.std.maths.sumOfIndexed
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2025/day/6

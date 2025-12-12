@@ -2,7 +2,6 @@ package com.fwdekker.aoc.y2025
 
 import com.fwdekker.aoc.Day
 import com.fwdekker.std.maths.sumOf
-import com.fwdekker.std.read
 import com.fwdekker.std.toDigits
 
 

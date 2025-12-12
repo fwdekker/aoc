@@ -14,7 +14,6 @@ import com.fwdekker.std.grid.height
 import com.fwdekker.std.grid.rows
 import com.fwdekker.std.grid.toChart
 import com.fwdekker.std.grid.width
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2023/day/16

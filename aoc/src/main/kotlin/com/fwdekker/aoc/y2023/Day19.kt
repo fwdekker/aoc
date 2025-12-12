@@ -6,7 +6,6 @@ import com.fwdekker.std.collections.map
 import com.fwdekker.std.maths.productOf
 import com.fwdekker.std.maths.splitGEQ
 import com.fwdekker.std.maths.splitLEQ
-import com.fwdekker.std.read
 import com.fwdekker.std.sections
 
 

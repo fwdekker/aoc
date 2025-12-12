@@ -12,7 +12,7 @@ import com.fwdekker.std.Challenge
  */
 abstract class Day(val year: Int, val day: Int, val sample: Int? = null) : Challenge(2) {
     override val resource: String get() =
-        "/y$year/Day${day}"
+        "y$year/Day${day}"
             .let { if (sample != null) "${it}Sample${sample}" else it }
             .let { "${it}.txt" }
 

@@ -1,7 +1,6 @@
 package com.fwdekker.aoc.y9999
 
 import com.fwdekker.aoc.Day
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/9999/day/999

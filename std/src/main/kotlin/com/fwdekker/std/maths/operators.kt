@@ -1,8 +1,8 @@
 @file:Suppress("unused")
 package com.fwdekker.std.maths
 
-import com.fwdekker.std.collections.map
 import com.fwdekker.std.collections.foldSum
+import com.fwdekker.std.collections.map
 import java.math.BigDecimal
 import java.math.BigInteger
 import kotlin.experimental.ExperimentalTypeInference

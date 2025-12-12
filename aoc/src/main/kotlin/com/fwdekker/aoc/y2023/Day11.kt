@@ -10,7 +10,6 @@ import com.fwdekker.std.grid.rows
 import com.fwdekker.std.grid.toChart
 import com.fwdekker.std.maths.cartesian
 import com.fwdekker.std.maths.toLongs
-import com.fwdekker.std.read
 import kotlin.math.max
 import kotlin.math.min
 

@@ -4,7 +4,6 @@ import com.fwdekker.aoc.Day
 import com.fwdekker.std.grid.Chart
 import com.fwdekker.std.grid.toCharts
 import com.fwdekker.std.grid.transpose
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2023/day/13

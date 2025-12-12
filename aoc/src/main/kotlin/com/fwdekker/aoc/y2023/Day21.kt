@@ -10,7 +10,6 @@ import com.fwdekker.std.grid.get
 import com.fwdekker.std.grid.getMod
 import com.fwdekker.std.grid.toChart
 import com.fwdekker.std.grid.width
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2023/day/21

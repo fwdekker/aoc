@@ -1,5 +1,6 @@
 package com.fwdekker.std
 
+import com.fwdekker.std.ChallengeTest.Companion.case
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
@@ -16,9 +17,11 @@ abstract class ChallengeTest(
     challenge: (Int?) -> Challenge,
     cases: Collection<Pair<Pair<Int, Int?>, Any>>
 ) : FunSpec({
-    withData(nameFn = { "sample $it" }, cases) { (input, expected) ->
-        val (part, sample) = input
-        challenge(sample).runPart(part) shouldBe expected
+    context("${this.javaClass.canonicalName}") {
+        withData(nameFn = { "sample $it" }, cases) { (input, expected) ->
+            val (part, sample) = input
+            challenge(sample).runPart(part) shouldBe expected
+        }
     }
 }) {
     /**

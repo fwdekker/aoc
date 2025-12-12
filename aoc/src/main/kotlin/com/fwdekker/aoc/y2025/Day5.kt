@@ -1,7 +1,6 @@
 package com.fwdekker.aoc.y2025
 
 import com.fwdekker.aoc.Day
-import com.fwdekker.std.read
 import com.fwdekker.std.sections
 import com.fwdekker.std.toLongs
 

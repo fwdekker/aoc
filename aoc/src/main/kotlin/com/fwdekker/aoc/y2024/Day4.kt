@@ -14,7 +14,6 @@ import com.fwdekker.std.grid.lastRowIndex
 import com.fwdekker.std.grid.northEast
 import com.fwdekker.std.grid.northWest
 import com.fwdekker.std.grid.toChart
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2024/day/4

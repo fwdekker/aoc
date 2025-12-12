@@ -6,7 +6,6 @@ import com.fwdekker.std.collections.mapFirst
 import com.fwdekker.std.collections.mapSecond
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.product
-import com.fwdekker.std.read
 
 
 // See https://adventofcode.com/2023/day/2

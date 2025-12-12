@@ -13,7 +13,6 @@ import com.fwdekker.std.grid.south
 import com.fwdekker.std.grid.toChart
 import com.fwdekker.std.grid.west
 import com.fwdekker.std.maths.product
-import com.fwdekker.std.read
 import kotlin.math.max
 
 

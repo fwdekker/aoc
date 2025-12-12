@@ -6,7 +6,6 @@ import com.fwdekker.std.collections.firsts
 import com.fwdekker.std.collections.seconds
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.histogram
-import com.fwdekker.std.read
 import com.fwdekker.std.toInts
 import kotlin.math.absoluteValue
 

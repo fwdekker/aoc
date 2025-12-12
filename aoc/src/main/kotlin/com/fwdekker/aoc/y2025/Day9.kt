@@ -13,7 +13,6 @@ import com.fwdekker.std.grid.col
 import com.fwdekker.std.grid.row
 import com.fwdekker.std.linesNotBlank
 import com.fwdekker.std.maths.allPairs
-import com.fwdekker.std.read
 import com.fwdekker.std.toInts
 import kotlin.math.abs
 

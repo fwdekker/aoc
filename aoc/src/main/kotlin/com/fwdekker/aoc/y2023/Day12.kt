@@ -5,7 +5,6 @@ import com.fwdekker.std.collections.asPair
 import com.fwdekker.std.collections.mapSeconds
 import com.fwdekker.std.collections.repeat
 import com.fwdekker.std.linesNotBlank
-import com.fwdekker.std.read
 import com.fwdekker.std.repeat
 import com.fwdekker.std.toInts
 

@@ -2,7 +2,6 @@ package com.fwdekker.std.maths
 
 import java.math.BigDecimal
 import java.math.MathContext
-import kotlin.collections.sumOf
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.sqrt
