@@ -1,83 +1,94 @@
 package com.fwdekker.std
 
-import com.fwdekker.std.maths.naturalNumbersInt
 import com.fwdekker.std.maths.sumOf
+import java.io.File
 import kotlin.time.Duration
 
 
 /**
  * Runs all [Challenge] instances matching a particular pattern.
  *
- * @property prefix The prefix that each class to run must start with.
- * @property nickname The word to use to describe an instance of a challenge that matches the pattern.
+ * @property type The general word with which to refer to [Challenge] instances.
+ * @property nickname Maps a class FQN to the nickname to refer to it by.
  * @property goodTime A threshold of time such that challenges that finish below this threshold are considered "good",
  * described as a time that can be parsed by [Duration.parse].
+ * @property filter Filters class FQNs of [Challenge]s to execute.
  */
 class AllChallenges(
-    private val prefix: String,
-    private val nickname: String = "Problem",
+    private val type: String = "Challenge",
+    private val nickname: (String) -> String = { clz -> "$type ${clz.takeLastWhile { it.isDigit() }}" },
     private val goodTime: String = "1s",
+    private val filter: (String) -> Boolean,
 ) {
     private val loader = AllChallenges::class.java.classLoader
 
 
-    fun run() = displayPerformance(findResults())
+    fun run() = displayPerformance(runChallenges(findChallenges()))
 
 
-    private fun findChallenges(): Sequence<Challenge> =
-        naturalNumbersInt(start = 1)
-            .map {
+    private fun allResources(): Sequence<File> =
+        sequence {
+            val roots = ArrayDeque(loader.getResources("").toList().map { url -> File(url.path) })
+            while (roots.isNotEmpty()) {
+                val next = roots.removeFirst()
+                yield(next)
+                roots.addAll(next.listFiles() ?: emptyArray())
+            }
+        }
+
+    private fun findChallenges(): Sequence<NamedChallenge> =
+        allResources()
+            .map { it.absolutePath }
+            .filter { it.endsWith(".class") }
+            .map { it.dropUntilAfter("/kotlin/main/").removeSuffix(".class").replace('/', '.') }
+            .filter(filter)
+            .sortedWith { a, b -> a.naturalCompareTo(b) }
+            .mapNotNull {
                 try {
-                    loader.loadClass("$prefix$it").getConstructor().newInstance()
-                } catch (_: ClassNotFoundException) {
+                    loader.loadClass(it).getConstructor().newInstance()
+                } catch (_: ReflectiveOperationException) {
                     null
                 }
             }
-            .takeWhile { it != null }
             .filterIsInstance<Challenge>()
+            .map { NamedChallenge(nickname(it::class.java.canonicalName), it) }
 
-    private fun findResults(): Map<IndexedValue<Challenge>, ChallengeResults> =
-        findChallenges()
-            .also { println("# $nickname") }
-            .map { challenge -> Pair(challenge, challenge.timeParts()) }
-            .mapIndexed { idx, (challenge, outputs) ->
-                challenge to outputs
-                    .also { print("$nickname ${idx + 1}. ") }
+    private fun runChallenges(challenges: Sequence<NamedChallenge>): Map<NamedChallenge, ChallengeResults> =
+        challenges
+            .associateWith { (name, challenge) ->
+                challenge.timeParts()
+                    .also { print("${name}. ") }
                     .onEach { (name, value, duration) -> print("$name: $value (${duration.ms} ms). ") }
                     .toList()
                     .also { print("Total time: ${it.sumOf { (_, _, duration) -> duration.ms }} ms.\n") }
             }
-            .mapIndexed { idx, (challenge, timedOutputs) ->
-                IndexedValue(idx + 1, challenge) to
-                    ChallengeResults(timedOutputs, timedOutputs.sumOf { it.duration })
-            }
-            .toMap()
+            .mapValues { (_, results) -> ChallengeResults(results, results.sumOf { it.duration }) }
 
-    private fun displayPerformance(challenges: Map<IndexedValue<Challenge>, ChallengeResults>) {
+    private fun displayPerformance(challenges: Map<NamedChallenge, ChallengeResults>) {
         val fastCount = challenges.count { (_, results) -> results.totalDuration < Duration.parse(this.goodTime) }
         val fastRatio = String.format("%.2f", fastCount.toDouble() * 100 / challenges.size)
-
-        val formatChallenge = { idx: Int, duration: Duration -> "$nickname $idx (${duration.ms} ms)" }
 
         println(
             "\n" +
                 "# Performance\n" +
-                "> ${nickname}s solved within ${this.goodTime}:\n" +
+                "> ${type}s solved within ${this.goodTime}:\n" +
                 "$fastCount/${challenges.size} (= $fastRatio%)\n" +
-                "> ${nickname}s in decreasing order of initialisation time:\n" +
+                "> ${type}s in decreasing order of initialisation time:\n" +
                 challenges
-                    .map { (challenge, results) -> challenge.index to results.parts[0].duration }
+                    .map { (challenge, results) -> challenge.name to results.parts[0].duration }
                     .sortedByDescending { (_, time) -> time }
-                    .joinToString(", ") { (number, time) -> formatChallenge(number, time) } +
+                    .joinToString(", ") { (name, time) -> "$name (${time.ms} ms)" } +
                 "\n" +
-                "> ${nickname}s in decreasing order of total runtime:\n" +
+                "> ${type}s in decreasing order of total runtime:\n" +
                 challenges
-                    .map { (challenge, results) -> challenge.index to results.totalDuration }
+                    .map { (challenge, results) -> challenge.name to results.totalDuration }
                     .sortedByDescending { (_, time) -> time }
-                    .joinToString(", ") { (number, time) -> formatChallenge(number, time) }
+                    .joinToString(", ") { (name, time) -> "$name (${time.ms} ms)" }
         )
     }
 
+
+    private data class NamedChallenge(val name: String, val challenge: Challenge)
 
     private data class ChallengeResults(val parts: List<PartResult>, val totalDuration: Duration)
 }

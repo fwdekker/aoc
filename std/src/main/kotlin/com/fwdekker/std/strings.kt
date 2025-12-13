@@ -1,6 +1,10 @@
 package com.fwdekker.std
 
+import com.fwdekker.std.collections.PeekingIterator
+import com.fwdekker.std.collections.peeking
 import com.fwdekker.std.collections.repeat
+import com.fwdekker.std.collections.takeWhile
+import com.fwdekker.std.maths.toInt
 import com.fwdekker.std.maths.toInts
 import java.math.BigDecimal
 import java.math.BigInteger
@@ -83,8 +87,11 @@ fun List<String>.allLongs(): List<List<Long>> = map { it.allLongs() }
  * Splits by [separator] and converts each entry to a [BigInteger].
  */
 fun String.toBigIntegers(separator: Char): List<BigInteger> = toBigIntegers(separator.toString())
-fun String.toBigIntegers(separator: String): List<BigInteger> = split(separator).filterNotBlank().map { it.trim().toBigInteger() }
-fun String.toBigIntegers(separator: Regex): List<BigInteger> = split(separator).filterNotBlank().map { it.trim().toBigInteger() }
+fun String.toBigIntegers(separator: String): List<BigInteger> =
+    split(separator).filterNotBlank().map { it.trim().toBigInteger() }
+
+fun String.toBigIntegers(separator: Regex): List<BigInteger> =
+    split(separator).filterNotBlank().map { it.trim().toBigInteger() }
 
 fun Sequence<String>.toBigIntegers(separator: Char): Sequence<List<BigInteger>> = map { it.toBigIntegers(separator) }
 fun Sequence<String>.toBigIntegers(separator: String): Sequence<List<BigInteger>> = map { it.toBigIntegers(separator) }
@@ -98,8 +105,11 @@ fun Iterable<String>.toBigIntegers(separator: Regex): List<List<BigInteger>> = m
  * Splits by [separator] and converts each entry to a [BigDecimal].
  */
 fun String.toBigDecimals(separator: Char): List<BigDecimal> = toBigDecimals(separator.toString())
-fun String.toBigDecimals(separator: String): List<BigDecimal> = split(separator).filterNotBlank().map { it.trim().toBigDecimal() }
-fun String.toBigDecimals(separator: Regex): List<BigDecimal> = split(separator).filterNotBlank().map { it.trim().toBigDecimal() }
+fun String.toBigDecimals(separator: String): List<BigDecimal> =
+    split(separator).filterNotBlank().map { it.trim().toBigDecimal() }
+
+fun String.toBigDecimals(separator: Regex): List<BigDecimal> =
+    split(separator).filterNotBlank().map { it.trim().toBigDecimal() }
 
 fun Sequence<String>.toBigDecimals(separator: Char): Sequence<List<BigDecimal>> = map { it.toBigDecimals(separator) }
 fun Sequence<String>.toBigDecimals(separator: String): Sequence<List<BigDecimal>> = map { it.toBigDecimals(separator) }
@@ -135,6 +145,11 @@ fun String.repeat(amount: Int, separator: String = ""): String =
 
 
 /**
+ * Returns the substring after the first occurrence of [needle].
+ */
+fun String.dropUntilAfter(needle: String): String = removeRange(0..<(indexOf(needle) + needle.length))
+
+/**
  * Splits this string into two parts at [index].
  */
 fun String.splitAtIndex(index: Int): Pair<String, String> = take(index) to drop(index)
@@ -143,3 +158,34 @@ fun String.splitAtIndex(index: Int): Pair<String, String> = take(index) to drop(
  * Invokes [splitAtIndex] at the first occurrence of the [delimiter].
  */
 fun String.splitAt(delimiter: Char): Pair<String, String> = splitAtIndex(indexOf(delimiter))
+
+
+/**
+ * Imposes natural sorting order over strings, so that `Foo10` comes after `Foo2`.
+ */
+fun String.naturalCompareTo(that: String): Int {
+    fun PeekingIterator<Char>.nextPart(): String =
+        if (peek().isDigit()) takeWhile { it.isDigit() }.joinToString("")
+        else next().toString()
+
+    fun String.partCompareTo(that: String): Int {
+        val thisIsNumeric = this[0].isDigit()
+        val thatIsNumeric = that[0].isDigit()
+        require(this.length == 1 || thisIsNumeric)
+        require(that.length == 1 || thatIsNumeric)
+
+        return if (thisIsNumeric && thatIsNumeric) this.toLong().compareTo(that.toLong())
+        else (this[0].code + thisIsNumeric.toInt() * 1000).compareTo(that[0].code + thatIsNumeric.toInt() * 1000)
+    }
+
+
+    val aIter = this.iterator().peeking()
+    val bIter = that.iterator().peeking()
+
+    while (aIter.hasNext() && bIter.hasNext()) {
+        aIter.nextPart().partCompareTo(bIter.nextPart())
+            .also { if (it != 0) return it }
+    }
+
+    return aIter.hasNext().compareTo(bIter.hasNext())
+}
