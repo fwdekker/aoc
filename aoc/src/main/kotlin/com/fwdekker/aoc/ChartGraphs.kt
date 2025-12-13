@@ -29,7 +29,7 @@ class AreaChartGraph(private val chart: Chart) : Graph<Coords>() {
  * A graph representation of a [Chart] in which `'#'` is a wall, all non-wall cells are nodes, and all adjacent nodes
  * are connected by an edge of weight one.
  */
-class WalledChartGraph(private val chart: Chart) : Graph<Coords>() {
+open class WalledChartGraph(protected val chart: Chart) : Graph<Coords>() {
     override val nodes: Collection<Coords>
         by lazy { chart.allCoords.filter { chart[it] != '#' }.toList() }
 
