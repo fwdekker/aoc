@@ -20,7 +20,7 @@ class AllChallenges(
     private val goodTime: String = "1s",
     private val filter: (String) -> Boolean,
 ) {
-    private val loader = AllChallenges::class.java.classLoader
+    private val loader = getClassLoader()
 
 
     fun run() = displayPerformance(runChallenges(findChallenges()))

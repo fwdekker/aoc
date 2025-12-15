@@ -1,6 +1,7 @@
 package com.fwdekker.std.maths
 
 import com.fwdekker.containExactlyInSameOrderElementsOf
+import com.fwdekker.std.getClassLoader
 import com.fwdekker.std.read
 import com.fwdekker.std.toBigIntegers
 import io.kotest.assertions.throwables.shouldThrow
@@ -129,7 +130,7 @@ object SequencesTest : DescribeSpec({
          */
         @Suppress("UNCHECKED_CAST")
         fun <N : Number> find(variant: Variant<N>): () -> Sequence<N> =
-            this::class.java.classLoader.loadClass("com.fwdekker.std.maths.SequencesKt")
+            getClassLoader().loadClass("com.fwdekker.std.maths.SequencesKt")
                 .methods.find { it.name == "${this.name}${variant.suffix}" }!!
                 .kotlinFunction!!
                 .let { { it.callBy(emptyMap()) as Sequence<N> } }

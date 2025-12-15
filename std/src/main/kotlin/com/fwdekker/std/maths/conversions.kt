@@ -97,6 +97,34 @@ fun Iterable<Triple<Number, Number, Number>>.toLongs(): List<Triple<Long, Long, 
 
 
 /**
+ * Converts all numbers to [Double]s.
+ */
+fun Pair<Number, Number>.toDoubles(): Pair<Double, Double> = map { it.toDouble() }
+
+fun Triple<Number, Number, Number>.toDoubles(): Triple<Double, Double, Double> = map { it.toDouble() }
+
+@JvmName("numbersToDoubles")
+fun Sequence<Number>.toDoubles(): Sequence<Double> = map { it.toDouble() }
+
+@JvmName("numbersToDoubles")
+fun Iterable<Number>.toDoubles(): List<Double> = map { it.toDouble() }
+
+@JvmName("numberPairsToDoubles")
+fun Sequence<Pair<Number, Number>>.toDoubles(): Sequence<Pair<Double, Double>> = map { it.toDoubles() }
+
+@JvmName("numberPairsToDoubles")
+fun Iterable<Pair<Number, Number>>.toDoubles(): List<Pair<Double, Double>> = map { it.toDoubles() }
+
+@JvmName("numberTriplesToDoubles")
+fun Sequence<Triple<Number, Number, Number>>.toDoubles(): Sequence<Triple<Double, Double, Double>> =
+    map { it.toDoubles() }
+
+@JvmName("numberTriplesToDoubles")
+fun Iterable<Triple<Number, Number, Number>>.toDoubles(): List<Triple<Double, Double, Double>> =
+    map { it.toDoubles() }
+
+
+/**
  * Converts all numbers to [BigInteger]s.
  */
 private fun Number.toBigInt(): BigInteger = toLong().toBigInteger()

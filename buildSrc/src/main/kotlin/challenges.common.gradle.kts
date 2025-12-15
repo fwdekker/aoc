@@ -20,6 +20,12 @@ kotlin {
     jvmToolchain(libs.findVersion("java").get().toString().toInt())
 }
 
+tasks.compileKotlin {
+    compilerOptions {
+        freeCompilerArgs.set(listOf("-Xcontext-parameters"))
+    }
+}
+
 tasks.test {
     systemProperty("kotest.framework.classpath.scanning.config.disable", "true")
     systemProperty("kotest.framework.classpath.scanning.autoscan.disable", "true")

@@ -7,8 +7,9 @@ import com.fwdekker.std.grid.Cardinal
 import com.fwdekker.std.grid.Coords
 import com.fwdekker.std.grid.move
 import com.fwdekker.std.linesNotBlank
-import com.fwdekker.std.maths.distance
+import com.fwdekker.std.maths.norm1
 import com.fwdekker.std.maths.toLongs
+import com.fwdekker.std.maths.vector.toVector
 import kotlin.math.abs
 import kotlin.math.roundToLong
 
@@ -41,7 +42,7 @@ class Day18(sample: Int? = null) : Day(year = 2023, day = 18, sample = sample) {
             .let { abs(it).toDouble() / 2 }
         val boundaryLength = indices
             .map { idx -> Pair(getMod(idx - 1), getMod(idx)).map { it.toLongs() } }
-            .sumOf { (prev, cur) -> prev.distance(cur) }
+            .sumOf { (prev, cur) -> prev.toVector().distance(cur.toVector()) { it.norm1() } }
         val interiorPoints = (area + 1 - boundaryLength / 2).roundToLong()
         return interiorPoints + boundaryLength
     }

@@ -10,6 +10,9 @@ class BigIntegerRange(
     override val start: BigInteger,
     override val endInclusive: BigInteger,
 ) : ClosedRange<BigInteger>, Iterable<BigInteger> {
+    val first = start
+    val last = endInclusive
+
     override operator fun iterator(): Iterator<BigInteger> =
         iterator {
             var current = start
@@ -45,6 +48,14 @@ fun Pair<Int, Int>.asRangeUntil(): IntRange = first..<second
 fun Pair<Long, Long>.asRangeUntil(): LongRange = first..<second
 
 fun Pair<BigInteger, BigInteger>.asRangeUntil(): BigIntegerRange = first.rangeUntil(second)
+
+
+/**
+ * Returns the number of elements in the range.
+ */
+val IntRange.size: Int get() = last - first + 1
+val LongRange.size: Long get() = last - first + 1
+val BigIntegerRange.size: BigInteger get() = last - first + BigInteger.ONE
 
 
 /**

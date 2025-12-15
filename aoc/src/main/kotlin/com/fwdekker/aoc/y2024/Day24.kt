@@ -21,6 +21,7 @@ class Day24(sample: Int? = null, private val swapCount: Int = 4) : Day(year = 20
 
     // TODO: Implement this; current implementation does not finish
     override fun part2(): String {
+        return ""
         val expectedOutput = "1".repeat(circuit.wires.filter { it.startsWith('x') }.size).toLong(2)
 
         return circuit.gates

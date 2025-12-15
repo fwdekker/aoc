@@ -6,8 +6,10 @@ import com.fwdekker.std.collections.associateWithIndex
 import com.fwdekker.std.collections.neverNull
 import com.fwdekker.std.grid.coordsOf
 import com.fwdekker.std.grid.toChart
-import com.fwdekker.std.maths.distance
+import com.fwdekker.std.maths.distanceTo
+import com.fwdekker.std.maths.norm1
 import com.fwdekker.std.maths.plus
+import com.fwdekker.std.maths.vector.IntMonoid
 import kotlin.math.absoluteValue
 
 
@@ -16,11 +18,12 @@ class Day20(sample: Int? = null, private val minSavings: Int = 100) : Day(year =
     private val chart = input.toChart()
 
 
-    override fun part1() = race(cheats = 2)
+    override fun part1() = with(IntMonoid) { race(cheats = 2) }
 
-    override fun part2() = race(cheats = 20)
+    override fun part2() = with(IntMonoid) { race(cheats = 20) }
 
 
+    context(monoid: IntMonoid)
     private fun race(cheats: Int): Int {
         val path = WalledChartGraph(chart).shortestPath(chart.coordsOf('E'), chart.coordsOf('S'))!!
         val pathLength = path.size - 1
@@ -30,7 +33,7 @@ class Day20(sample: Int? = null, private val minSavings: Int = 100) : Day(year =
             (-cheats..cheats).asSequence()
                 .flatMap { x -> (-cheats + x.absoluteValue..cheats - x.absoluteValue).map { y -> node + (x to y) } }
                 .filter { it in distanceLeft.keys }
-                .map { (pathLength - distanceLeft[node]) + node.distance(it) + distanceLeft[it] }
+                .map { todoRenameMe -> (pathLength - distanceLeft[node]) + node.distanceTo(todoRenameMe) { oot -> oot.norm1() } + distanceLeft[todoRenameMe] }
                 .count { it <= pathLength - minSavings }
         }
     }

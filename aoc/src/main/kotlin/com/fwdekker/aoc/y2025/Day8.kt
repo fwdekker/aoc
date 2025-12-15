@@ -6,11 +6,9 @@ import com.fwdekker.std.collections.mapAt
 import com.fwdekker.std.collections.sorted
 import com.fwdekker.std.collections.without
 import com.fwdekker.std.linesNotBlank
-import com.fwdekker.std.maths.Vec3
-import com.fwdekker.std.maths.compareTo
-import com.fwdekker.std.maths.distance
 import com.fwdekker.std.maths.norm2
 import com.fwdekker.std.maths.productOf
+import com.fwdekker.std.maths.vector.toVector
 import com.fwdekker.std.toLongs
 
 
@@ -21,9 +19,9 @@ class Day8(sample: Int? = null, private val connections: Int = 1_000) : Day(year
     private val spanning =
         boxes
             .flatMapIndexed { idx, box -> boxes.drop(idx + 1).map { box to it } }
-            .sortedBy { box -> box.first.distance(box.second, norm = { it.norm2() }) }
+            .sortedBy { box -> box.first.toVector().distance(box.second.toVector()) { it.norm2() } }
             .let { pairs ->
-                val seen = mutableSetOf<Vec3<Long>>()
+                val seen = mutableSetOf<Triple<Long, Long, Long>>()
 
                 pairs.takeWhile { (from, to) ->
                     (seen.size != boxes.size).also {
@@ -36,9 +34,9 @@ class Day8(sample: Int? = null, private val connections: Int = 1_000) : Day(year
 
     override fun part1(): Long =
         spanning
-            .distinctBy { it.sorted { p1, p2 -> p1.compareTo(p2) } }
+            .distinctBy { it.sorted { p1, p2 -> p1.toVector().compareTo(p2.toVector()) } }
             .take(connections)
-            .fold(listOf<Set<Vec3<Long>>>()) { circuits, (from, to) ->
+            .fold(listOf<Set<Triple<Long, Long, Long>>>()) { circuits, (from, to) ->
                 val fromIdx = circuits.indexOfFirst { it.contains(from) }
                 val toIdx = circuits.indexOfFirst { it.contains(to) }
 
