@@ -72,17 +72,14 @@ fun <T, U, V> Sequence<T>.cartesian(that: Iterable<U>, other: Iterable<V>): Sequ
  *
  * If [amount] is `2`, this is the same as doing [cartesian] on [this] with itself.
  */
-fun <T> List<T>.combinations(amount: Int): Sequence<List<T>> {
+fun <T> Sequence<T>.combinations(amount: Int): Sequence<List<T>> {
     require(amount >= 0) { "Cannot choose $amount elements from a list." }
 
     return if (amount == 0) emptySequence()
-    else asSequence()
-        .let { base ->
-            base.map { listOf(it) }.foldSelf(amount - 1) { all -> all.flatMap { combo -> base.map { combo + it } } }
-        }
+    else map { listOf(it) }.foldSelf(amount - 1) { all -> all.flatMap { combo -> map { combo + it } } }
 }
 
-fun <T> Iterable<T>.combinations(amount: Int): Sequence<List<T>> = toList().combinations(amount)
+fun <T> Iterable<T>.combinations(amount: Int): Sequence<List<T>> = asSequence().combinations(amount)
 
 /**
  * Returns all possible permutations of [this] collection's elements.
